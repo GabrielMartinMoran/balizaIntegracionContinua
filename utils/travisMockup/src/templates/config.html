@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Travis Mockup Configuration</title>
+    </head>
+    <body>
+        <label>
+            Estado del Build:
+        </label>
+        <select onchange="updateServerBuildStatus()" id="buildStatusSelector">
+            <option value="passed">Passed</option>
+            <option value="failed">Failed</option>
+            <option value="created">Created</option>
+        </select> 
+    </body>
+    <script>
+        var serverURL = "{{SERVER_URL}}";        
+        var httpGet = function(theUrl){
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false);
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        var updateServerBuildStatus = function(){
+            var buildSelect = document.getElementById("buildStatusSelector");
+            var selectedValue = buildSelect.options[buildSelect.selectedIndex].value;
+            httpGet(serverURL + "/set_status/" + selectedValue);
+        }        
+    </script>
+</html>
