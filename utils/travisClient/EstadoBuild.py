@@ -1,6 +1,6 @@
 from enum import Enum
 
-class BuildStatus(Enum):
+class EstadoBuild(Enum):
     PASSED = 1
     FAILED = 2
     RUNNING = 3

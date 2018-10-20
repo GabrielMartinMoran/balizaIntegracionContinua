@@ -1,5 +1,5 @@
 import requests
-from BuildStatus import BuildStatus
+from EstadoBuild import EstadoBuild
 
 #https://docs.travis-ci.com/api/#builds
 
@@ -17,24 +17,24 @@ def get_status(github_username, repository_name, travis_token):
         response = requests.get(TRAVIS_API_URL + "/repo/"+ github_username +"%2F"+ repository_name + "/builds?limit=1&sort_by=finished_at:desc", headers=headers)
     except requests.exceptions.ConnectionError:
         #Si existe error de conexion
-        return BuildStatus.CONNECTION_ERROR
+        return EstadoBuild.CONNECTION_ERROR
     #Si existe algun problema de credenciales, usuario o repositorio incorrectos
     if(response.text == "access denied"):
-        return BuildStatus.ACCESS_DENIED
+        return EstadoBuild.ACCESS_DENIED
     json_response = response.json()
     #Si no fue compilado nunca
     if(len(json_response['builds']) == 0):
-        return BuildStatus.NOT_YET_BUILT
+        return EstadoBuild.NOT_YET_BUILT
     build_status = json_response['builds'][0]['state']
     #Si paso los tests
     if(build_status == "passed"):
-        return BuildStatus.PASSED
+        return EstadoBuild.PASSED
     #Si fallo los tests
     elif(build_status == "failed"):
-        return BuildStatus.FAILED
+        return EstadoBuild.FAILED
     else:
         #Si en este momento esta corriendo los tests
-        return BuildStatus.RUNNING
+        return EstadoBuild.RUNNING
 
 ci_public_access_token = "9cHb1xMQyaGSSSsi6xTW5Q"
 repository_name = "dyasc-2018"
