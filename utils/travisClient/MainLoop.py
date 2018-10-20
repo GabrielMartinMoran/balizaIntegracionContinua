@@ -1,5 +1,6 @@
 from ClienteTravis import *
 import time
+import gc
 
 def main():
     token = "9cHb1xMQyaGSSSsi6xTW5Q"
@@ -17,6 +18,7 @@ def main():
             print("\n------ CAMBIO DE ESTADO A:",estado_actual,"------\n")
         else:
             print("PERMANECE EN ESTADO:",estado_actual)
+        gc.collect()
         time.sleep(1)
 
 if __name__ == '__main__':

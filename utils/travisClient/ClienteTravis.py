@@ -1,3 +1,4 @@
+import json
 from ClienteCI import *
 from BuildStatus import BuildStatus
 import gc
@@ -6,11 +7,11 @@ try:
 except:
     import requests as http_request
 
-class ClienteTravis(ClienteCI):
+TRAVIS_API_URL = "https://api.travis-ci.org"
+#TRAVIS_API_URL = "http://127.0.0.1:8080"
 
-    global TRAVIS_API_URL
-    #TRAVIS_API_URL = "https://api.travis-ci.org"
-    TRAVIS_API_URL = "http://127.0.0.1:8080"
+class ClienteTravis(ClienteCI):    
+    
 
     def __init__(self, usuario_github, repositorio, token):
         self.__usuario_github = usuario_github
@@ -19,42 +20,47 @@ class ClienteTravis(ClienteCI):
     
     def configurar(self, usuario_github, repositorio, token):
         self.__init__(usuario_github, repositorio, token)
-    
-    def __obtener_estado(self):
+
+    def __consultar_estado(self):
         #Definimos los headers para el request
         headers = {
             "Travis-API-Version": "3",
             "Authorization": "token " + self.__token
         }
-        response = None
-        estado = None
+        response = http_request.get(TRAVIS_API_URL + "/repo/" +
+                            self.__usuario_github +"%2F"+ self.__repositorio +
+                            "/builds?limit=1&sort_by=finished_at:desc", headers=headers)
+        response.close()
+        return response.text
+
+    def __obtener_estado(self, response):
+        #Si existe algun problema de credenciales, usuario o repositorio incorrectos
+        if(response == "access denied"):         
+            return BuildStatus.ACCESS_DENIED
+        #Transformamos el response a JSON
+        reponse_json = json.loads(response)
+        #Si no fue compilado nunca
+        if(len(reponse_json['builds']) == 0):
+            return BuildStatus.NOT_YET_BUILT
+        #Traemos el string que representa el estado del build
+        estado = reponse_json['builds'][0]['state']
+        #Si paso los tests
+        if(estado == "passed"):
+            return BuildStatus.PASSED
+        #Si fallo los tests
+        elif(estado == "failed"):
+            return BuildStatus.FAILED
+        #Si en este momento esta corriendo los tests
+        else:            
+            return BuildStatus.RUNNING
+
+    def get_estado(self):
         try:
-            response = http_request.get(TRAVIS_API_URL + "/repo/"+ self.__usuario_github +"%2F"+ self.__repositorio + "/builds?limit=1&sort_by=finished_at:desc", headers=headers)
+            response = self.__consultar_estado()
         except http_request.exceptions.ConnectionError:
             #Si existe error de conexion
             return BuildStatus.CONNECTION_ERROR
-        #Si existe algun problema de credenciales, usuario o repositorio incorrectos
-        if(response.text == "access denied"):
-            response.close()
-            return BuildStatus.ACCESS_DENIED
-        #Si no fue compilado nunca
-        if(len(response.json()['builds']) == 0):
-            response.close()
-            return BuildStatus.NOT_YET_BUILT
-        build_status = response.json()['builds'][0]['state']
-        #Si paso los tests
-        if(build_status == "passed"):
-            estado = BuildStatus.PASSED
-        #Si fallo los tests
-        elif(build_status == "failed"):
-            estado = BuildStatus.FAILED
-        else:
-            #Si en este momento esta corriendo los tests
-            estado = BuildStatus.RUNNING
-        return estado
-
-    def get_estado(self):
-        estado = self.__obtener_estado()
+        estado = self.__obtener_estado(response)
         #Ejecutamos el Garbage Collector
         gc.collect()
         return estado
@@ -65,6 +71,7 @@ def main():
     usuario = "MrKupo"
     cliente = ClienteTravis(usuario, repositorio, token)
     print(cliente.get_estado())
+    #cliente.consultar_estado()
 
 if __name__ == '__main__':
     main()
