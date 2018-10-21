@@ -12,9 +12,9 @@ class Led:
         self.pin_led = machine.PWM(machine.Pin(pin_led))
         self.set(0)
 
-    def set(self, led):
-        self.led = int(led)
-        self.pin_led.duty(self.__map__(self.led))
+    def set(self, intensidad):
+        self.intensidad = int(intensidad)
+        self.pin_led.duty(self.__map__(self.intensidad))
 
     def __map__(self, n):
         if(n < 0 or n > 255):
