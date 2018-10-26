@@ -7,7 +7,7 @@ class NumeroInvalidoException(Exception):
         self.mensaje = mensaje
 
 
-class Led:
+class ControladorLed:
     def __init__(self, pin_led):
         self.pin_led = machine.PWM(machine.Pin(pin_led))
         self.set(0)
