@@ -1,6 +1,3 @@
-import machine
-pins = [machine.Pin(i, machine.Pin.IN) for i in (0, 2, 4, 5, 12, 13, 14, 15)]
-
 html = """
 <!DOCTYPE html>
 <html>
@@ -99,5 +96,5 @@ while True:
             response = make_response(decoded_line)
         if not line or line == b'\r\n':
             break
-    cl.send(response)
+    cl.send(response.encode())
     cl.close()

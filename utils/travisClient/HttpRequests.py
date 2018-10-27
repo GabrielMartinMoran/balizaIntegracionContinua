@@ -12,9 +12,12 @@ class ConnectionError(Exception):
 def request(tipo, url, headers={}):
     try:
         response = http_requests.request(tipo, url, headers=headers)
-    except Exception as exc:
-        raise ConnectionError() from exc
-    response.close()
+    except Exception:
+        raise ConnectionError()
+    #print("RESPONSE")
+    #print(help(response))
+    #if(response != None):
+    #    response.close()
     return response
 
 def post(url, headers={}):

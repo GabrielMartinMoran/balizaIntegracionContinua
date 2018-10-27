@@ -20,8 +20,9 @@ webrepl.start()
 ap_if = network.WLAN(network.AP_IF)
 ap_if.active(True)
 ap_if.config(essid='ESP32', authmode=network.AUTH_WPA_WPA2_PSK, password='micropython')
+"""
 sta_if = network.WLAN(network.STA_IF)
-ap_if.active(True)
+sta_if.active(True)
 for i in range(10):
     sta_if.connect('CyberGames', '')
     if(sta_if.isconnected()):
@@ -37,3 +38,4 @@ for i in range(10):
     time.sleep(1)
 
 print("Conectado a AP ", sta_if.isconnected())
+"""

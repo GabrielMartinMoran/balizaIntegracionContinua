@@ -1,102 +1,56 @@
-import json
-import os
+from Configuracion import Configuracion
 
-ARCHIVO_CONFIGURACION = "config.json"
-TRAVIS_API_URL = "https://api.travis-ci.org"
+class ConfiguracionTravis(Configuracion):
 
-class ConfiguracionTravis:
-
-    __data = {
-        "TOKEN"       : None,
-        "USUARIO"     : None,
-        "REPOSITORIO" : None,
-        "API_URL"     : None,
-    }
+    _TRAVIS_API_URL = "https://api.travis-ci.org"
 
     def __init__(self):
-        self.__cargar_archivo_configuracion()
+        self._ARCHIVO_CONFIGURACION = "configuracion_travis.json"
+        self._data = {
+            "TOKEN"       : None,
+            "USUARIO"     : None,
+            "REPOSITORIO" : None,
+            "API_URL"     : None,
+        }
+        super(ConfiguracionTravis,self)._cargar_archivo_configuracion()
+
+    def _set_valores_data(self, usuario, repositorio, token, api_url):
+        self.set_usuario(usuario)
+        self.set_repositorio(repositorio)
+        self.set_token(token)
+        self.set_api_url(api_url)
 
     """
     Dado un usuario, un repositorio, un token y opcionalmente una URL para la API, establece
     la configuracion
     """
-    def configurar(self, usuario, repositorio, token, api_url=TRAVIS_API_URL):
-        self.set_usuario(usuario)
-        self.set_repositorio(repositorio)
-        self.set_token(token)
-        self.set_api_url(api_url)
-        self.__guardar_archivo_configuracion()
-
-    """
-    Se considera que esta configurada si todos los parametros de configuracion son
-    distinto de None
-    """
-    def esta_configurada(self):
-        for x in self.__data:
-            if(self.__data[x] == None):
-                return False
-        return True
+    def configurar(self, usuario, repositorio, token, api_url=_TRAVIS_API_URL):
+        super(ConfiguracionTravis,self).configurar(usuario, repositorio, token, api_url)
 
     def set_api_url(self, api_url):
-        self.__data["API_URL"] = api_url
-        self.__guardar_archivo_configuracion()
+        self._data["API_URL"] = api_url
+        super(ConfiguracionTravis,self)._guardar_archivo_configuracion()
 
     def set_repositorio(self, repositorio):
-        self.__data["REPOSITORIO"] = repositorio
-        self.__guardar_archivo_configuracion()
+        self._data["REPOSITORIO"] = repositorio
+        super(ConfiguracionTravis,self)._guardar_archivo_configuracion()
 
     def set_usuario(self, usuario):
-        self.__data["USUARIO"] = usuario
-        self.__guardar_archivo_configuracion()
+        self._data["USUARIO"] = usuario
+        super(ConfiguracionTravis,self)._guardar_archivo_configuracion()
 
     def set_token(self, token):
-        self.__data["TOKEN"] = token
-        self.__guardar_archivo_configuracion()
+        self._data["TOKEN"] = token
+        super(ConfiguracionTravis,self)._guardar_archivo_configuracion()
 
     def get_api_url(self):
-        return self.__data["API_URL"]
+        return self._data["API_URL"]
 
     def get_repositorio(self):
-        return self.__data["REPOSITORIO"]
+        return self._data["REPOSITORIO"]
 
     def get_usuario(self):
-        return self.__data["USUARIO"]
+        return self._data["USUARIO"]
 
     def get_token(self):
-        return self.__data["TOKEN"]
-
-    def __get_path_archivo_configuracion(self):
-        path_scipt = os.path.realpath(__file__)
-        path_directorio = os.path.dirname(path_scipt)
-        return os.path.join(path_directorio, ARCHIVO_CONFIGURACION)
-
-    def __guardar_archivo_configuracion(self):
-        f = open(self.__get_path_archivo_configuracion(), "w")
-        f.write(json.dumps(self.__data))
-        f.close()
-    
-    def __cargar_archivo_configuracion(self):
-        if(not self.existe_archivo_configuracion()):
-            return False
-        f = open(self.__get_path_archivo_configuracion(),"r")
-        self.__data = json.loads(f.read())
-        f.close()
-
-    def __borrar_archivo_configuracion(self):
-        if(self.existe_archivo_configuracion()):
-            os.remove(self.__get_path_archivo_configuracion())
-
-    """
-    Devuelve True si existe guardado un archivo de configuracion
-    """
-    def existe_archivo_configuracion(self):
-        return os.path.isfile(self.__get_path_archivo_configuracion())
-
-    """
-    Borra la configuracion actual y si el parametro borrar_archivo_configuracion esta en True tambien elimina el archivo guardado
-    """
-    def borrar_configuracion(self, borrar_archivo_configuracion=False):
-        for x in self.__data:
-            self.__data[x] = None
-        if(borrar_archivo_configuracion):
-            self.__borrar_archivo_configuracion()
+        return self._data["TOKEN"]
