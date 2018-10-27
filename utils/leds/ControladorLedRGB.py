@@ -7,7 +7,7 @@ class IntensidadInvalidaException(Exception):
 
 class ControladorLedRGB:
 
-  def __init__(self, controladorLedR, controladorLedG, controladorLedB)
+  def __init__(self, controladorLedR, controladorLedG, controladorLedB):
     self.controladorLedR = controladorLedR
     self.controladorLedG = controladorLedG
     self.controladorLedB = controladorLedB

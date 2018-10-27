@@ -12,6 +12,6 @@ class ControladorLed:
         self.set_intensidad(0)
 
     def set_intensidad(self, intensidad):
-        if(n < 0 or n > 1023):
-        raise IntensidadPWMInvalidaException("La intensidad PWM debe estar entre 0 y 1023")
+        if(intensidad < 0 or intensidad > 1023):
+            raise IntensidadPWMInvalidaException("La intensidad PWM debe estar entre 0 y 1023")
         self.pin_led.duty(intensidad)
