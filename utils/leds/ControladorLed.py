@@ -1,7 +1,6 @@
 import machine
 
-
-class NumeroInvalidoException(Exception):
+class IntensidadPWMInvalidaException(Exception):
 
     def __init__(self, mensaje):
         self.mensaje = mensaje
@@ -10,13 +9,9 @@ class NumeroInvalidoException(Exception):
 class ControladorLed:
     def __init__(self, pin_led):
         self.pin_led = machine.PWM(machine.Pin(pin_led))
-        self.set(0)
+        self.set_intensidad(0)
 
-    def set(self, intensidad):
-        self.intensidad = int(intensidad)
-        self.pin_led.duty(self.__map__(self.intensidad))
-
-    def __map__(self, n):
-        if(n < 0 or n > 255):
-            raise NumeroInvalidoException("El valor debe estar entre 0 y 255")
-        return int((float(n) / 255) * 1023)
+    def set_intensidad(self, intensidad):
+        if(n < 0 or n > 1023):
+        raise IntensidadPWMInvalidaException("La intensidad PWM debe estar entre 0 y 1023")
+        self.pin_led.duty(intensidad)
