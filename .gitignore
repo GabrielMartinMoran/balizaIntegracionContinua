@@ -3,3 +3,5 @@
 __pycache__/
 utils/leds/Program.py
 utils/buzzer/ejemplo.py
+utils/buzzer/boot.py
+utils/buzzer/program.py
