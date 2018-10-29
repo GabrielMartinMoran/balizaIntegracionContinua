@@ -1,9 +1,10 @@
 from ControladorLedRGB import *
 
-class ColorNoEncontradoException(Exception):
 
-  def __init__(self, mensaje):
-    self.mensaje = mensaje
+class ColorNoEncontradoException(Exception):
+    def __init__(self, mensaje):
+        self.mensaje = mensaje
+
 
 class ManejadorLedRGB:
     def __init__(self, controlador_led_rgb):
@@ -22,10 +23,10 @@ class ManejadorLedRGB:
 
     def set_color(self, color):
         if(color in self.colores):
-          rgb = self.colores[color]
-          self.set_color(rgb)
+            rgb = self.colores[color]
+            self.controlador_led_rgb.set_rgb(rgb)
         else:
-          raise ColorNoEncontradoException("El color " + color + " no esta especificado")   
+            raise ColorNoEncontradoException("El color " + color + " no esta especificado")
 
     def get_colores(self):
         return self.colores

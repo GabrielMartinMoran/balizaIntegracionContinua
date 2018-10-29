@@ -1,5 +1,6 @@
 import machine
 
+
 class IntensidadPWMInvalidaException(Exception):
 
     def __init__(self, mensaje):
