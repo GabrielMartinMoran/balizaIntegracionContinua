@@ -2,3 +2,4 @@
 .vscode
 __pycache__/
 utils/leds/Program.py
+utils/buzzer/ejemplo.py
