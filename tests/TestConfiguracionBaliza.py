@@ -25,11 +25,11 @@ class TestConfiguracionBaliza(unittest.TestCase):
 		
 		configuracion_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
 		configuracion_red = ConfiguracionBaliza.instancia.get_configuracion_red()
-		configuracion_GPIO = ConfiguracionBaliza.instancia.get_configuracion_GPIO()
+		configuracion_led_RGB = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
 
 		self.assertEqual(ConfiguracionTravis, type(configuracion_travis))
 		self.assertEqual(ConfiguracionRed, type(configuracion_red))
-		self.assertEqual(ConfiguracionGPIO, type(configuracion_GPIO))
+		self.assertEqual(ConfiguracionLedRGB, type(configuracion_led_RGB))
 
 		#LIMPIAMOS LA CONFIGURACION RESULTANTE
 		configuracion.borrar_configuracion(True)
@@ -42,11 +42,11 @@ class TestConfiguracionBaliza(unittest.TestCase):
 		
 		configuracion_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
 		configuracion_red = ConfiguracionBaliza.instancia.get_configuracion_red()
-		configuracion_GPIO = ConfiguracionBaliza.instancia.get_configuracion_GPIO()
+		configuracion_led_RGB = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
 
 		conf_travis_configurada = configuracion_travis.esta_configurada()
 		conf_red_configurada = configuracion_red.esta_configurada()
-		conf_GPIO_configurada = configuracion_GPIO.esta_configurada()
+		conf_GPIO_configurada = configuracion_led_RGB.esta_configurada()
 
 		self.assertEqual(False, conf_travis_configurada)
 		self.assertEqual(False, conf_red_configurada)
