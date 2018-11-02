@@ -3,6 +3,7 @@ from ConfiguracionBaliza import ConfiguracionBaliza
 try:
     from ManejadorLedRGB import *
     from ManejadorBuzzer import *
+    import _thread
 except:
     #Si no pudo importar machine
     pass
@@ -25,6 +26,12 @@ class EvaluadorEstadoBuild:
         if(estado_actual != self.estado_build):
             self.estado_build = estado_actual
             print("CAMBIO DE ESTADO DEL BUILD A:",self.estado_build)
-            self.manejador_led_RGB.set_estado(self.estado_build)
-            self.manejador_buzzer.reproducir(self.estado_build)
+            _thread.start_new_thread(self.activar_led,([]))
+            _thread.start_new_thread(self.activar_buzzer,([]))
         gc.collect()
+
+    def activar_led(self):
+        self.manejador_led_RGB.set_estado(self.estado_build)
+    
+    def activar_buzzer(self):
+        self.manejador_buzzer.reproducir(self.estado_build)
