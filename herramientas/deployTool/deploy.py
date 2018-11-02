@@ -18,6 +18,9 @@ DEPLOY_SCRIPTS = [
     ("./../../src/ControladorLedRGB.py","ControladorLedRGB.py"),
     ("./../../src/ManejadorLedRGB.py","ManejadorLedRGB.py"),
     ("./../../src/ColoresLed.py","ColoresLed.py"),
+    ("./../../src/ControladorBuzzer.py","ControladorBuzzer.py"),
+    ("./../../src/ManejadorBuzzer.py","ManejadorBuzzer.py"),
+    ("./../../src/ConfiguracionBuzzer.py","ConfiguracionBuzzer.py"),
     ("webrepl_cfg.py","webrepl_cfg.py") #PARA CONFIGURAR WEBREPL
 ]
 

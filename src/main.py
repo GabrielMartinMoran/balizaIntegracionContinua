@@ -8,8 +8,10 @@ configuracionBaliza = ConfiguracionBaliza()
 #Configuracion de Travis
 TRAVIS_API_URL = "http://10.0.0.199:8080"
 TOKEN = "9cHb1xMQyaGSSSsi6xTW5Q"
+#TOKEN = "zIad7_tjIcVqyc3bo0agUw"
 REPOSITORIO = "dyasc-2018"
 USUARIO = "MrKupo"
+#USUARIO = "cybercatnet"
 
 #Configuracion de Red
 SSID = "AP"
@@ -35,6 +37,12 @@ config_led_rgb.configurar(
     12,
     13,
     14
+)
+
+config_buzzer = ConfiguracionBaliza.instancia.get_configuracion_buzzer()
+
+config_buzzer.configurar(
+    32
 )
 
 import time

@@ -1,6 +1,12 @@
 from ControladorBuzzer import *
 import time
+from EstadoBuild import EstadoBuild
 
+
+class PorcentajeInvalidoException(Exception):
+
+    def __init__(self, mensaje):
+        self.mensaje = mensaje
 
 class CancionNoEncontradaException(Exception):
 
@@ -9,8 +15,17 @@ class CancionNoEncontradaException(Exception):
 
 
 class ManejadorBuzzer:
-    def __init__(self, controladorBuzzer):
-        self.controladorBuzzer = controladorBuzzer
+    
+    CANCIONES_ESTADOS = {
+        EstadoBuild.PASSED:           "PASSED",
+        EstadoBuild.FAILED:           "FAILED",
+        EstadoBuild.RUNNING:          "RUNNING",
+        EstadoBuild.CONNECTION_ERROR: "CONNECTION_ERROR",
+        EstadoBuild.ACCESS_DENIED: "ACCESS_DENIED"
+    }
+
+    def __init__(self, configuracion_buzzer):
+        self.controladorBuzzer = ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
         self.controladorBuzzer.set_intensidad(self.__map__(30))
         self.nota = {"SILENCIO": 0,
                      "B0": 31,
@@ -181,7 +196,30 @@ class ManejadorBuzzer:
                                     "D7",
                                     "B6",
                                     "SILENCIO",
-                                    "SILENCIO"]}
+                                    "SILENCIO"],
+                            "PASSED":["G7",
+                                    "SILENCIO",
+                                    "D7",
+                                    "SILENCIO",
+                                    "F4",
+                                    "E7",
+                                    "B6",
+                                    "SILENCIO","SILENCIO"],
+                            "FAILED":["E7",
+                                    "SILENCIO",
+                                    "C4",
+                                    "E5",
+                                    "SILENCIO",
+                                    "G2",
+                                    "SILENCIO","SILENCIO"],
+                            "RUNNING": ["B0","D4","SILENCIO","A5","B3","SILENCIO","SILENCIO"],
+                            "CONNECTION_ERROR": ["A4","F4","E3","SILENCIO","B4","SILENCIO","SILENCIO"],
+                            "ACCESS_DENIED": ["E7",
+                                    "SILENCIO",
+                                    "C3",
+                                    "E7",
+                                    "SILENCIO","SILENCIO"]}
+
 
     def __map__(self, n):
         if(n < 0 or n > 100):
