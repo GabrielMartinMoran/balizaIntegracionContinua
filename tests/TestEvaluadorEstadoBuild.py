@@ -28,7 +28,7 @@ class ManejadorLedRGBMockup():
 		self.estado = estado
 		self.cambio_estado = True
 
-class TestClienteTravis(unittest.TestCase):
+class TestEvaluadorEstadoBuild(unittest.TestCase):
 
 	def test_creamos_un_evaluador_estado_nuevo_y_evaluamos_la_primera_vez_para_ver_si_cambio_el_estado(self):
 		evaluador = EvaluadorEstadoBuild()
