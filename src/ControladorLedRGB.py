@@ -1,6 +1,5 @@
 from ControladorLed import *
 
-
 class IntensidadInvalidaException(Exception):
 
     def __init__(self, mensaje):
@@ -9,10 +8,10 @@ class IntensidadInvalidaException(Exception):
 
 class ControladorLedRGB:
 
-    def __init__(self, controladorLedR, controladorLedG, controladorLedB):
-        self.controladorLedR = controladorLedR
-        self.controladorLedG = controladorLedG
-        self.controladorLedB = controladorLedB
+    def __init__(self, configuracion_led_rgb):
+        self.controladorLedR = ControladorLed(configuracion_led_rgb.get_pin_led_rojo())
+        self.controladorLedG = ControladorLed(configuracion_led_rgb.get_pin_led_verde())
+        self.controladorLedB = ControladorLed(configuracion_led_rgb.get_pin_led_azul())
 
     def set_rgb(self, rgb):
         r, g, b = rgb

@@ -6,20 +6,20 @@ configuracionBaliza = ConfiguracionBaliza()
 
 #Hardcodeamos las configuraciones
 #Configuracion de Travis
-TRAVIS_API_URL = "http://192.168.0.18:8080"
+TRAVIS_API_URL = "http://172.30.142.12:8080"
 TOKEN = "9cHb1xMQyaGSSSsi6xTW5Q"
 REPOSITORIO = "dyasc-2018"
 USUARIO = "MrKupo"
 
 #Configuracion de Red
-SSID = "Fibertel WiFi589 2.4GHz"
-CLAVE = "00438829825"
+SSID = "CyberGames"
+CLAVE = ""
 
 ConfiguracionBaliza.instancia.get_configuracion_travis().configurar(
     USUARIO,
     REPOSITORIO,
-    TOKEN#,
-    #TRAVIS_API_URL #COMENTAMOS PARA QUE USE LA API DE TRAVIS
+    TOKEN,
+    TRAVIS_API_URL #COMENTAMOS PARA QUE USE LA API DE TRAVIS
 )
 
 config_red = ConfiguracionBaliza.instancia.get_configuracion_red()
@@ -27,6 +27,14 @@ config_red = ConfiguracionBaliza.instancia.get_configuracion_red()
 config_red.configurar(
     SSID,
     CLAVE
+)
+
+config_led_rgb = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
+
+config_led_rgb.configurar(
+    12,
+    13,
+    14
 )
 
 import time
@@ -47,7 +55,7 @@ if(network_importada):
             print("Se ha establecido la conexión con la red:",config_red.get_SSID())
             break
         cantidad_intentos_conexion += 1
-        time.sleep(1)
+        time.sleep(5)
 
 
 import LoopPrincipal
