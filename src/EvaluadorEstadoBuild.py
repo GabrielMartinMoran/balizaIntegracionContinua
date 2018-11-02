@@ -1,14 +1,22 @@
 from ClienteTravis import ClienteTravis
 from ConfiguracionBaliza import ConfiguracionBaliza
-from ManejadorLedRGB import *
+try:
+    from ManejadorLedRGB import *
+except:
+    #Si no pudo importar machine
+    pass
 import gc
 
 class EvaluadorEstadoBuild:
 
     def __init__(self):
         self.estado_build = None
-        self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
-        self.manejador_led_RGB = ManejadorLedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
+        try:
+            self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
+            self.manejador_led_RGB = ManejadorLedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
+        except:
+            #Si ocurre algun error de inicializacion para testing
+            pass
 
     def evaluar_estado(self):
         estado_actual = self.clienteTravis.get_estado()
