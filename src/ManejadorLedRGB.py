@@ -1,5 +1,6 @@
 from ControladorLedRGB import *
 from EstadoBuild import EstadoBuild
+import ColoresLed
 
 class ColorNoEncontradoException(Exception):
     def __init__(self, mensaje):
@@ -7,34 +8,23 @@ class ColorNoEncontradoException(Exception):
 
 
 class ManejadorLedRGB:
-    COLORES = {"apagado": (0, 0, 0),
-                        "rojo": (255, 0, 0),
-                        "verde": (0, 255, 0),
-                        "azul": (0, 0, 255),
-                        "blanco": (255, 255, 255),
-                        "amarillo": (255, 255, 0),
-                        "cyan": (0, 255, 255),
-                        "magenta": (255, 0, 255)}
-    COLORES_ESTADOS = {EstadoBuild.PASSED: "verde",
-                        EstadoBuild.FAILED: "rojo",
-                        EstadoBuild.RUNNING: "cyan",
-                        EstadoBuild.CONNECTION_ERROR: "amarillo"}
+
+    COLORES_ESTADOS = {
+        EstadoBuild.PASSED:           ColoresLed.VERDE,
+        EstadoBuild.FAILED:           ColoresLed.ROJO,
+        EstadoBuild.RUNNING:          ColoresLed.CYAN,
+        EstadoBuild.CONNECTION_ERROR: ColoresLed.AMARILLO
+    }
 
     def __init__(self, configuracion_led_rgb):
         self.controlador_led_rgb = ControladorLedRGB(configuracion_led_rgb)
+        self.__apagar_leds()
 
-        self.set_color("apagado")
-
-    def set_color(self, color):
-        if(color in self.COLORES):
-            rgb = self.COLORES[color]
-            self.controlador_led_rgb.set_rgb(rgb)
-        else:
-            raise ColorNoEncontradoException("El color " + color + " no esta especificado")
-
+    def __apagar_leds(self):
+        self.set_color((0,0,0))
+    
+    def set_color(self, valor_rgb):
+        self.controlador_led_rgb.set_rgb(valor_rgb)
+    
     def set_estado(self, estado):
         self.set_color(self.COLORES_ESTADOS[estado])
-
-
-    def get_colores(self):
-        return self.COLORES
