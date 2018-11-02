@@ -1,12 +1,8 @@
 boot
-ClienteCI
-Colores
 ControladorLed
 ControladorLedRGB
-EstadoBuild
 EvaluadorEstadoBuild
 LoopPrincipal
 main
-MailLoop
 ManejadorLedRGB
-run
+run (separarlo de la carpeta src)

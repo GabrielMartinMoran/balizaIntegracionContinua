@@ -6,14 +6,14 @@ configuracionBaliza = ConfiguracionBaliza()
 
 #Hardcodeamos las configuraciones
 #Configuracion de Travis
-TRAVIS_API_URL = "http://172.30.142.12:8080"
+TRAVIS_API_URL = "http://10.0.0.199:8080"
 TOKEN = "9cHb1xMQyaGSSSsi6xTW5Q"
 REPOSITORIO = "dyasc-2018"
 USUARIO = "MrKupo"
 
 #Configuracion de Red
-SSID = "CyberGames"
-CLAVE = ""
+SSID = "AP"
+CLAVE = "Passw0rd"
 
 ConfiguracionBaliza.instancia.get_configuracion_travis().configurar(
     USUARIO,
