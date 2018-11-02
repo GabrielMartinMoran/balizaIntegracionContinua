@@ -13,8 +13,7 @@ class ConfiguracionBuzzer(Configuracion):
         self.set_pin_buzzer(pin_buzzer)
 
     """
-    Dado los pines correpsondientes a los puertos GPIO donde se encuentran conectados los
-    leds rojo, verde y azul, establece la configuracion
+    Dado los pines correpsondientes a los puertos GPIO donde se encuentran conecta el buzzer
     """
     def configurar(self, pin_buzzer):
         super(ConfiguracionBuzzer,self).configurar(pin_buzzer)
