@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify, render_template
 
 
-USERNAME = ["MrKupo","cybercatnet"]
+USERNAME = "MrKupo"
 REPOSITORY = "dyasc-2018"
-VALID_TOKEN = ["9cHb1xMQyaGSSSsi6xTW5Q","zIad7_tjIcVqyc3bo0agUw"]
+VALID_TOKEN = "9cHb1xMQyaGSSSsi6xTW5Q"
 VALID_API_VERSION = "3"
 SERVER_DOMAIN = "http://localhost"
 PORT=8080
@@ -36,7 +36,7 @@ def generate_build_state():
 @app.route('/repo/<username>/<repository>/builds', methods=['GET'])
 def get_build_satus(username, repository):
     headers_valid = has_valid_headers(request.headers)
-    if(not headers_valid or username not in USERNAME or repository != REPOSITORY):
+    if(not headers_valid or username != USERNAME or repository != REPOSITORY):
         return "access denied"
     build_state = generate_build_state()
     return jsonify(build_state)
