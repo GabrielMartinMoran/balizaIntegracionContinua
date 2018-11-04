@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Configuración - Baliza de Integración Continua</title>
+    </head>
+    <body class="mx-1">
+        <h1>
+            Configuración de la Baliza de Integración Continua
+        </h1>
+        {{FORMULARIOS_CONFIGURACION}}
+    </body>
+</html>
+<script>
+var HTTP_SERVER = "{{HOST_URL}}";
+
+var convertirParametros = function(parametros){
+    //Cada parametro tiene el formato {"nombre" : NOMBRE, "valor" : VALOR}
+    const separador = "&";
+    parametrosStr = "";
+    for (let i = 0; i < parametros.length; i++) {
+        const element = parametros[i];
+        parametrosStr += element.nombre.toString() + "=" + element.valor.toString();
+        if(i < parametros.length-1){
+            parametrosStr += separador;
+        }
+    }
+    return parametrosStr;
+};
+
+var httpGet = function (destino, parametros) {
+    return new Promise(
+        function(resolve){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.response);
+                }
+            }
+            var parametrosStr = convertirParametros(parametros);
+            var url = HTTP_SERVER + "/" + destino + "?" + parametrosStr;
+            console.log(url);
+            xhr.open('get', url, true);
+            xhr.send();
+        }
+    );
+};
+</script>

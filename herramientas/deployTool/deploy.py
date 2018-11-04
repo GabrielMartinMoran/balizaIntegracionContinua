@@ -21,6 +21,11 @@ DEPLOY_SCRIPTS = [
     ("./../../src/ControladorBuzzer.py","ControladorBuzzer.py"),
     ("./../../src/ManejadorBuzzer.py","ManejadorBuzzer.py"),
     ("./../../src/ConfiguracionBuzzer.py","ConfiguracionBuzzer.py"),
+    ("./../../src/ServidorHTTP.py","ServidorHTTP.py"),
+    ("./../../src/ServidorHTTPConfiguracion.py","ServidorHTTPConfiguracion.py"),
+    ("./../../src/plantillas_html/plantilla.html","plantillas_html/plantilla.html"),
+    ("./../../src/plantillas_html/configuracion_ci.html","plantillas_html/configuracion_ci.html"),
+    ("./../../src/plantillas_html/configuracion_red.html","plantillas_html/configuracion_red.html"),
     ("webrepl_cfg.py","webrepl_cfg.py") #PARA CONFIGURAR WEBREPL
 ]
 
