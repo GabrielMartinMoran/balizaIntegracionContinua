@@ -1,11 +1,8 @@
 import socket
 import gc
-import re
 from _thread import start_new_thread
 
 class ServidorHTTP():
-
-    REQUEST_PARSE_REGEX = r'(\/[A-Za-z_-]+)\?|([^&?]*?=[^&?]*)'
 
     def __init__(self, host, puerto, clientes_maximos = 5, imprimir_log = False):
         self.__configurar(host, puerto, clientes_maximos, imprimir_log)
