@@ -1,4 +1,5 @@
-from ControladorLedRGB import *
+import ImportadorMultiplataforma
+CLRGB = ImportadorMultiplataforma.importar("ControladorLedRGB")
 from EstadoBuild import EstadoBuild
 import ColoresLed
 import time
@@ -19,7 +20,7 @@ class ManejadorLedRGB:
     }
 
     def __init__(self, configuracion_led_rgb):
-        self.controlador_led_rgb = ControladorLedRGB(configuracion_led_rgb)
+        self.controlador_led_rgb = CLRGB.ControladorLedRGB(configuracion_led_rgb)
         self.__apagar_led()
 
     def __apagar_led(self):
@@ -38,3 +39,12 @@ class ManejadorLedRGB:
 
     def set_estado(self, estado):
         self.parpadear(self.COLORES_ESTADOS[estado])
+
+def main():
+    manejador = ManejadorLedRGB(None)
+    manejador.set_estado(EstadoBuild.PASSED)
+    while(True):
+        continue
+
+if __name__ == '__main__':
+    main()

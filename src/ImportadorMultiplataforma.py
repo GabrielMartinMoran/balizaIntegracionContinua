@@ -19,6 +19,12 @@ MODULOS = {
     "network"  : { "PYTHON" : "NetworkMockup",
                    "MICROPYTHON": "network"
                  },
+    "ControladorBuzzer"  : { "PYTHON" : "ControladorBuzzerMockup",
+                             "MICROPYTHON": "ControladorBuzzer"
+                           },
+    "ControladorLedRGB"  : { "PYTHON" : "ControladorLedRGBMockup",
+                             "MICROPYTHON": "ControladorLedRGB"
+                           },
 }
 
 def importar(modulo):

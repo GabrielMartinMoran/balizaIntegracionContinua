@@ -1,4 +1,5 @@
-from ControladorBuzzer import *
+import ImportadorMultiplataforma
+CB = ImportadorMultiplataforma.importar("ControladorBuzzer")
 import time
 from EstadoBuild import EstadoBuild
 
@@ -21,7 +22,7 @@ class ManejadorBuzzer:
     }
 
     def __init__(self, configuracion_buzzer):
-        self.controladorBuzzer = ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
+        self.controladorBuzzer = CB.ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
         self.controladorBuzzer.set_intensidad(self.__map__(30))
         self.nota = {"SILENCIO": 0,
                      "B0": 31,
