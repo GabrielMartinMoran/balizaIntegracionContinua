@@ -1,7 +1,7 @@
 import sys
 
 def __get_nombre_plataforma():
-    if(sys.platform == "pyboard"):
+    if(sys.platform == "esp32"):
         return "MICROPYTHON"
     return "PYTHON"
 
@@ -28,9 +28,7 @@ MODULOS = {
 }
 
 def importar(modulo):
-    nombre_modulo = ""
+    nombre_modulo = modulo
     if(modulo in MODULOS):
         nombre_modulo = MODULOS[modulo][__get_nombre_plataforma()]
-    else:
-        nombre_modulo = modulo
     return __import__(nombre_modulo)

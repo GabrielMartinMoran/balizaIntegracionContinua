@@ -26,8 +26,8 @@ class EvaluadorEstadoBuild:
         if(estado_actual != self.estado_build):
             self.estado_build = estado_actual
             print("CAMBIO DE ESTADO DEL BUILD A:",self.estado_build)
-            _thread.start_new_thread(self.activar_led,([]))
-            _thread.start_new_thread(self.activar_buzzer,([]))
+            _thread.start_new_thread(self.activar_led,())
+            _thread.start_new_thread(self.activar_buzzer,())
         gc.collect()
 
     def activar_led(self):
