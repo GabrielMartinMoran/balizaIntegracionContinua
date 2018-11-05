@@ -5,6 +5,10 @@ def __get_nombre_plataforma():
         return "MICROPYTHON"
     return "PYTHON"
 
+if __get_nombre_plataforma() == "PYTHON":
+    import os
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/mockups')))
+
 MODULOS = {
     "requests" : { "PYTHON" : "requests",
                    "MICROPYTHON": "urequests"
@@ -12,22 +16,15 @@ MODULOS = {
     "machine"  : { "PYTHON" : "requests",
                    "MICROPYTHON": "urequests"
                  },
-    "network"  : { "PYTHON" : "networkMockup",
+    "network"  : { "PYTHON" : "NetworkMockup",
                    "MICROPYTHON": "network"
                  },
 }
 
-def p_import(modulo):
+def importar(modulo):
     nombre_modulo = ""
     if(modulo in MODULOS):
         nombre_modulo = MODULOS[modulo][__get_nombre_plataforma()]
     else:
         nombre_modulo = modulo
     return __import__(nombre_modulo)
-
-def main():
-    _os = p_import("os")
-    print(_os.listdir())
-
-if __name__ == '__main__':
-    main()
