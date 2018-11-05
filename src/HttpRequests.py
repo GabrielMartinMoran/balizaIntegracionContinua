@@ -1,9 +1,5 @@
-try:
-    #EN MICROPYTHON
-    import urequests as http_requests
-except:
-    #EN PYTHON
-    import requests as http_requests
+import ImportadorMultiplataforma
+http_requests = ImportadorMultiplataforma.importar("requests")
 
 #Excepcion a lanzar cuando ocurre un error de conexion
 class ConnectionError(Exception):

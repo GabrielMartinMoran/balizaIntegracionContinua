@@ -1,17 +1,12 @@
 import machine
 
-
 class IntensidadPWMInvalidaException(Exception):
-
     def __init__(self, mensaje):
         self.mensaje = mensaje
-
 
 class FrecuenciaPWMInvalidaException(Exception):
-
     def __init__(self, mensaje):
         self.mensaje = mensaje
-
 
 class ControladorBuzzer:
     def __init__(self, pin_buzzer):
