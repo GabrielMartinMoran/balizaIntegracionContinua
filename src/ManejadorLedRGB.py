@@ -1,4 +1,4 @@
-from ControladorLedRGB import *
+from ControladorLedRGB import ControladorLedRGB
 from EstadoBuild import EstadoBuild
 import ColoresLed
 import time

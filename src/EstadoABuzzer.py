@@ -15,5 +15,8 @@ class EstadoABuzzer:
         self.reproductor = Reproductor(configuracion_buzzer)
     
     def set_estado(self, estado):
-        _thread.start_new_thread(lambda:self.reproductor.reproducir(estado),([]))
+        _thread.start_new_thread(self.__set_estado,([self.CANCIONES_ESTADOS[estado]]))
+    
+    def __set_estado(self, estado):
+        self.reproductor.reproducir(estado)
 
