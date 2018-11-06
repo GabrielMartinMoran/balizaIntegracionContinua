@@ -10,8 +10,11 @@ estadoABuzzer = EstadoABuzzer(ConfiguracionBaliza.instancia.get_configuracion_bu
 estadoALedRGB = EstadoALedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
 manejador_de_estados.agregar_salida(estadoABuzzer)
 manejador_de_estados.agregar_salida(estadoALedRGB)
-evaluador = EvaluadorEstadoBuild(manejador_de_estados)
+evaluador = EvaluadorEstadoBuild()
 
 while(True):
-    evaluador.evaluar_estado()
+    hay_nuevo_estado, estado_actual = evaluador.evaluar_cambio_de_estado()
+    if(hay_nuevo_estado):
+        print("CAMBIO DE ESTADO DEL BUILD A:", estado_actual)
+        manejador_de_estados.set_estado(estado_actual)
     time.sleep(0.2)
