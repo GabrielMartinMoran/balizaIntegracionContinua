@@ -13,9 +13,6 @@ MODULOS = {
     "requests" : { "PYTHON" : "requests",
                    "MICROPYTHON": "urequests"
                  },
-    "machine"  : { "PYTHON" : "requests",
-                   "MICROPYTHON": "urequests"
-                 },
     "network"  : { "PYTHON" : "NetworkMockup",
                    "MICROPYTHON": "network"
                  },
