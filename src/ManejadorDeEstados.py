@@ -11,7 +11,7 @@ class ManejadorDeEstados:
     
     def set_estado(self, estado):
         for salida in self.lista_de_salidas:
-            _thread.start_new_thread(self.__set_estado,([salida,estado]))
+            _thread.start_new_thread(self.__set_estado,(salida,estado))
 
     def __set_estado(self, salida, estado):
         salida.set_estado(estado)

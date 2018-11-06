@@ -24,7 +24,7 @@ MODULOS = {
                            },
     "ControladorLedRGB"  : { "PYTHON" : "ControladorLedRGBMockup",
                              "MICROPYTHON": "ControladorLedRGB"
-                           },
+                           }
 }
 
 def importar(modulo):
