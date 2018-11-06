@@ -17,7 +17,9 @@ USUARIO = "MrKupo"
 SSID = "AP"#"Fibertel WiFi589 2.4GHz"
 CLAVE = "Passw0rd"#"00438829825"
 
-ConfiguracionBaliza.instancia.get_configuracion_travis().configurar(
+config_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
+
+config_travis.configurar(
     USUARIO,
     REPOSITORIO,
     TOKEN#,
@@ -49,4 +51,11 @@ from ConectorWiFi import ConectorWiFi
 conector_wifi = ConectorWiFi(config_red)
 conector_wifi.conectar()
 
+from _thread import start_new_thread
+from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
+#Iniciamos el servidor HTTP
+start_new_thread(ServidorHTTPConfiguracion,("127.0.0.1",8080,config_travis, config_red))
+
 import LoopPrincipal
+#Iniciamos el loop principal
+LoopPrincipal.iniciar()

@@ -47,6 +47,9 @@ class ClienteTravis(ClienteCI):
             return EstadoBuild.ACCESS_DENIED
         #Transformamos el response a JSON
         response_json = json.loads(response)
+        #Cuando ocurre un error al estar mal el nombre de usuario o el repositorio
+        if('error_type' in response_json):
+            return EstadoBuild.CONNECTION_ERROR
         #Si no fue compilado nunca
         if(len(response_json['builds']) == 0):
             return EstadoBuild.NOT_YET_BUILT

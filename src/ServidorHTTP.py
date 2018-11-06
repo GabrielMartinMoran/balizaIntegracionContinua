@@ -69,7 +69,7 @@ class ServidorHTTP():
         response = None
         if(self.__es_request(decoded_data)):
             response = self.__atender_request(decoded_data)
-        conexion.sendall(response.encode())
+        conexion.sendall(response.encode('utf-8'))
         response = None
         conexion.close()
         gc.collect()

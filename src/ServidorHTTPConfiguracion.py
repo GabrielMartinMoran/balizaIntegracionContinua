@@ -25,8 +25,8 @@ class ServidorHTTPConfiguracion:
         self.__servidor_HTTP.agregar_ruteo("/set_configuracion_red",self.set_configuracion_red)
 
     def __get_contenido_archivo(self, path):
-        archivo = open(path,'r')
-        contenido = archivo.read()
+        archivo = open(path,'rb')
+        contenido = archivo.read().decode('utf-8')
         archivo.close()
         return contenido    
 
