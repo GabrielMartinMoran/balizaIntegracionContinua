@@ -1,6 +1,5 @@
-from ControladorBuzzer import *
+from ControladorBuzzer import ControladorBuzzer
 import time
-from EstadoBuild import EstadoBuild
 
 
 class PorcentajeInvalidoException(Exception):
@@ -16,14 +15,6 @@ class CancionNoEncontradaException(Exception):
 
 class Reproductor:
     
-    CANCIONES_ESTADOS = {
-        EstadoBuild.PASSED:           "PASSED",
-        EstadoBuild.FAILED:           "FAILED",
-        EstadoBuild.RUNNING:          "RUNNING",
-        EstadoBuild.CONNECTION_ERROR: "CONNECTION_ERROR",
-        EstadoBuild.ACCESS_DENIED: "ACCESS_DENIED"
-    }
-
     def __init__(self, configuracion_buzzer):
         self.controladorBuzzer = ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
         self.controladorBuzzer.set_intensidad(self.__map__(30))
