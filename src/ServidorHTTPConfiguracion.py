@@ -1,4 +1,5 @@
 from ServidorHTTP import *
+import json
 
 PATH_CARPETA_PLANTILLAS = "./plantillas_html/"
 PLANTILLA_HTML = PATH_CARPETA_PLANTILLAS + "plantilla.html"
@@ -23,6 +24,8 @@ class ServidorHTTPConfiguracion:
         self.__servidor_HTTP.agregar_ruteo("/",self.get_html_configuracion)
         self.__servidor_HTTP.agregar_ruteo("/set_configuracion_travis",self.set_configuracion_travis)
         self.__servidor_HTTP.agregar_ruteo("/set_configuracion_red",self.set_configuracion_red)
+        self.__servidor_HTTP.agregar_ruteo("/get_configuracion_travis",self.get_configuracion_travis)
+        self.__servidor_HTTP.agregar_ruteo("/get_configuracion_red",self.get_configuracion_red)
 
     def __get_contenido_archivo(self, path):
         archivo = open(path,'rb')
@@ -38,12 +41,31 @@ class ServidorHTTPConfiguracion:
         return plantilla_html.replace(self.ETIQUETA_REEEMPLAZO,formulario_red + formulario_ci)
 
     def set_configuracion_travis(self, parametros):
-        self.__configuracion_travis.configurar(parametros["usuario"], parametros["repositorio"], parametros["token"])
-        return "CONFIGURACION TRAVIS ESTABLECIDA"
+        if(parametros["APIurl"] != ""):
+            self.__configuracion_travis.configurar(parametros["usuario"], parametros["repositorio"], parametros["token"], parametros["APIurl"])
+        else:
+            self.__configuracion_travis.configurar(parametros["usuario"], parametros["repositorio"], parametros["token"])
+        return "{'resultado':'Configuracion de Travis establecida!'}"
 
     def set_configuracion_red(self, parametros):
         self.__configuracion_red.configurar(parametros["SSID"], parametros["clave"])
-        return "CONFIGURACION RED ESTA"
+        return "{'resultado':'Configuracion de red establecida!'}"
+
+    def get_configuracion_travis(self, parametros):
+        response = {
+            "usuario" : self.__configuracion_travis.get_usuario(),
+            "repositorio" : self.__configuracion_travis.get_repositorio(),
+            "token" : self.__configuracion_travis.get_token(),
+            "APIurl" : self.__configuracion_travis.get_api_url()
+        }
+        return json.dumps(response)
+
+    def get_configuracion_red(self, parametros):
+        response = {
+            "SSID" : self.__configuracion_red.get_SSID(),
+            "clave" : self.__configuracion_red.get_clave(),
+        }
+        return json.dumps(response)
 
     def detener(self):
         self.__servidor_HTTP.detener()

@@ -15,4 +15,3 @@ class EstadoABuzzer:
     
     def set_estado(self, estado):
         self.reproductor.reproducir(self.CANCIONES_ESTADOS[estado])
-

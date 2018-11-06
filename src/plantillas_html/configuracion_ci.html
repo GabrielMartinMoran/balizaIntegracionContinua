@@ -13,12 +13,17 @@
             <div>
                 <input type="text" id="textRepositorio" name="textRepositorio"/>
             </div>
-        </div>
-        
+        </div>        
         <div class="row col-md-4">
             <label for="textToken" class="col-md-4 control-label">Token de Travis</label>
             <div>
                 <input type="text" id="textToken" name="textToken"/>
+            </div>
+        </div>
+        <div class="row col-md-4">
+            <label for="textAPIurl" class="col-md-4 control-label">URL de la API de Travis</label>
+            <div>
+                <input type="text" id="textAPIurl" name="textAPIurl"/>
             </div>
         </div>
     </div>
@@ -44,7 +49,11 @@
             {
                 "nombre" : "token",
                 "valor"  : elementos["textToken"].value
-            }             
+            },
+            {
+                "nombre" : "APIurl",
+                "valor"  : elementos["textAPIurl"].value
+            }  
         ];
         httpGet("set_configuracion_travis", parametros).then(
             function(response){
@@ -52,4 +61,24 @@
             }
         );
     }
+    function getDatosTravis() {
+        httpGet("get_configuracion_travis", null).then(
+            function(response){
+                var elementos = document.getElementById("formularioTravis").elements;                
+                if(response.usuario){
+                    elementos["textUsuario"].value = response.usuario;
+                }
+                if(response.repositorio){
+                    elementos["textRepositorio"].value = response.repositorio;
+                }
+                if(response.token){
+                    elementos["textToken"].value = response.token;
+                }
+                if(response.APIurl){
+                    elementos["textAPIurl"].value = response.APIurl;
+                }
+            }
+        );
+    }
+    window.addEventListener("load", getDatosTravis, true);
 </script>

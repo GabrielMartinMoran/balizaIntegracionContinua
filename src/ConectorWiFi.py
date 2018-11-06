@@ -1,4 +1,4 @@
-import time
+from time import sleep
 import ImportadorMultiplataforma
 network = ImportadorMultiplataforma.importar("network")
 
@@ -8,6 +8,8 @@ class ConectorWiFi:
         self.__configuracion_red = configuracion_red
         self.__sta_if = None
         self.__tiempo_entre_intentos = tiempo_entre_intentos
+        #Suscribimos el metodo de conexion ante un cambio en la configuracion
+        configuracion_red.on_cambio_configuracion(self.conectar)
 
     def __inicializar_estacion(self):
         self.__sta_if = network.WLAN(network.STA_IF)
@@ -21,7 +23,7 @@ class ConectorWiFi:
             print("\nIntento número",cantidad_intentos_conexion)
             self.__sta_if.connect(self.__configuracion_red.get_SSID(), self.__configuracion_red.get_clave())
             cantidad_intentos_conexion += 1
-            time.sleep(self.__tiempo_entre_intentos)
+            sleep(self.__tiempo_entre_intentos)
         print("Se ha establecido la conexión con la red:",self.__configuracion_red.get_SSID())
 
     def esta_conectado(self):

@@ -2,6 +2,8 @@ from Configuracion import Configuracion
 
 class ConfiguracionRed(Configuracion):
 
+    __elementos_suscritos_al_cambio = []
+
     def __init__(self):
         self._ARCHIVO_CONFIGURACION = "configuracion_red.json"
         self._data = {
@@ -19,6 +21,7 @@ class ConfiguracionRed(Configuracion):
     """
     def configurar(self, SSID, clave):
         super(ConfiguracionRed,self).configurar(SSID, clave)
+        self.__on_cambio_configuracion()
 
     def set_SSID(self, SSID):
         self._data["SSID"] = SSID
@@ -33,3 +36,10 @@ class ConfiguracionRed(Configuracion):
 
     def get_clave(self):
         return self._data["CLAVE"]
+
+    def __on_cambio_configuracion(self):
+        for x in self.__elementos_suscritos_al_cambio:
+            x()
+
+    def on_cambio_configuracion(self, funcion):
+        self.__elementos_suscritos_al_cambio.append(funcion)

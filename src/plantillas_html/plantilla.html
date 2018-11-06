@@ -34,12 +34,14 @@ var httpGet = function (destino, parametros) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
-                    console.log(xhr.response);
-                }
+                    resolve(JSON.parse(xhr.response));                  
+                }                
             }
-            var parametrosStr = convertirParametros(parametros);
-            var url = HTTP_SERVER + "/" + destino + "?" + parametrosStr;
-            console.log(url);
+            var url = HTTP_SERVER + "/" + destino;
+            if(parametros){
+                var parametrosStr = convertirParametros(parametros);
+                url += "?" + parametrosStr;
+            }
             xhr.open('get', url, true);
             xhr.send();
         }

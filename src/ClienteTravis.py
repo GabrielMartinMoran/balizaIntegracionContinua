@@ -56,6 +56,8 @@ class ClienteTravis(ClienteCI):
         return self.__parsear_estado(response_json)
 
     def get_estado(self):
+        if(not self.__configuracion_travis.esta_configurada()):
+            return EstadoBuild.CONNECTION_ERROR
         try:
             response = self.__consultar_estado()
         except HttpRequests.ConnectionError:

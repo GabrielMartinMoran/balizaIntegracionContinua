@@ -41,4 +41,18 @@
             }
         );
     }
+    function getDatosRed() {
+        httpGet("get_configuracion_red", null).then(
+            function(response){
+                var elementos = document.getElementById("formularioRed").elements;
+                if(response.SSID){
+                    elementos["textSSID"].value = response.SSID;
+                }
+                if(response.clave){
+                    elementos["textClave"].value = response.clave;
+                }
+            }
+        );
+    }
+    window.addEventListener("load", getDatosRed, true);
 </script>
