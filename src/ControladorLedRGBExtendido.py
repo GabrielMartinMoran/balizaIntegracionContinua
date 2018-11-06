@@ -1,4 +1,5 @@
-from ControladorLedRGB import ControladorLedRGB
+import ImportadorMultiplataforma
+CLRGB = ImportadorMultiplataforma.importar("ControladorLedRGB")
 import ColoresLed
 import time
 
@@ -25,3 +26,10 @@ class ControladorLedRGBExtendido:
             time.sleep(0.2)
             self.__apagar_led()
             time.sleep(0.2)
+        self.set_color(valor_rgb)
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()

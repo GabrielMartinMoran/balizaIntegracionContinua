@@ -1,9 +1,8 @@
-from ControladorBuzzer import ControladorBuzzer
+import ImportadorMultiplataforma
+CB = ImportadorMultiplataforma.importar("ControladorBuzzer")
 import time
 
-
 class PorcentajeInvalidoException(Exception):
-
     def __init__(self, mensaje):
         self.mensaje = mensaje
 
@@ -14,18 +13,6 @@ class CancionNoEncontradaException(Exception):
 
 class Reproductor:
     
-=======
-class ManejadorBuzzer:
-    
-    CANCIONES_ESTADOS = {
-        EstadoBuild.PASSED:           "PASSED",
-        EstadoBuild.FAILED:           "FAILED",
-        EstadoBuild.RUNNING:          "RUNNING",
-        EstadoBuild.CONNECTION_ERROR: "CONNECTION_ERROR",
-        EstadoBuild.ACCESS_DENIED:    "ACCESS_DENIED"
-    }
-
->>>>>>> master:src/ManejadorBuzzer.py
     def __init__(self, configuracion_buzzer):
         self.controladorBuzzer = CB.ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
         self.controladorBuzzer.set_intensidad(self.__map__(30))
@@ -245,8 +232,8 @@ def main():
     import ConfiguracionBuzzer
     conf = ConfiguracionBuzzer.ConfiguracionBuzzer()
     conf.configurar(1)
-    manejador = ManejadorBuzzer(conf)
-    manejador.reproducir("mario")
+    reproductor = Reproductor(conf)
+    reproductor.reproducir("mario")
     conf.borrar_configuracion(True)
 
 if __name__ == '__main__':
