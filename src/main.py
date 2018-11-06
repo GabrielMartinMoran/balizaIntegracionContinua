@@ -20,8 +20,8 @@ CLAVE = "Passw0rd"
 ConfiguracionBaliza.instancia.get_configuracion_travis().configurar(
     USUARIO,
     REPOSITORIO,
-    TOKEN,
-    TRAVIS_API_URL #COMENTAMOS PARA QUE USE LA API DE TRAVIS
+    TOKEN#,
+    #TRAVIS_API_URL #COMENTAMOS PARA QUE USE LA API DE TRAVIS
 )
 
 config_red = ConfiguracionBaliza.instancia.get_configuracion_red()
