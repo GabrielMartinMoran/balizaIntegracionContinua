@@ -2,7 +2,7 @@ from ClienteTravis import ClienteTravis
 from ConfiguracionBaliza import ConfiguracionBaliza
 try:
     from ManejadorLedRGB import *
-    from ManejadorBuzzer import *
+    from Reproductor import Reproductor
     import _thread
 except:
     #Si no pudo importar machine
@@ -16,7 +16,7 @@ class EvaluadorEstadoBuild:
         try:
             self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
             self.manejador_led_RGB = ManejadorLedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
-            self.manejador_buzzer = ManejadorBuzzer(ConfiguracionBaliza.instancia.get_configuracion_buzzer())
+            self.reproductor = Reproductor(ConfiguracionBaliza.instancia.get_configuracion_buzzer())
         except:
             #Si ocurre algun error de inicializacion para testing
             pass
@@ -34,4 +34,4 @@ class EvaluadorEstadoBuild:
         self.manejador_led_RGB.set_estado(self.estado_build)
     
     def activar_buzzer(self):
-        self.manejador_buzzer.reproducir(self.estado_build)
+        self.reproductor.reproducir(self.estado_build)

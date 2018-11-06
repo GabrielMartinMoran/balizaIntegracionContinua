@@ -14,7 +14,7 @@ class CancionNoEncontradaException(Exception):
         self.mensaje = mensaje
 
 
-class ManejadorBuzzer:
+class Reproductor:
     
     CANCIONES_ESTADOS = {
         EstadoBuild.PASSED:           "PASSED",
