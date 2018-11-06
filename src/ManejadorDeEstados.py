@@ -1,5 +1,5 @@
-from EstadoABuzzer import EstadoABuzzer
-from EstadoALedRGB import EstadoALedRGB
+from TraductorEstadoABuzzer import TraductorEstadoABuzzer
+from TraductorEstadoALedRGB import TraductorEstadoALedRGB
 from _thread import start_new_thread
 
 class ManejadorDeEstados:

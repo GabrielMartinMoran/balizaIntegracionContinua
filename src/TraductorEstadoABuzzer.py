@@ -1,7 +1,7 @@
 from EstadoBuild import EstadoBuild
 from Reproductor import Reproductor
 
-class EstadoABuzzer:
+class TraductorEstadoABuzzer:
     CANCIONES_ESTADOS = {
         EstadoBuild.PASSED:           "PASSED",
         EstadoBuild.FAILED:           "FAILED",
