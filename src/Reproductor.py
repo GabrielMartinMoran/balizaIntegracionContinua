@@ -223,7 +223,6 @@ class Reproductor:
                 else:
                     self.controladorBuzzer.set_intensidad(self.__map__(30))
                     self.controladorBuzzer.set_frecuencia(self.nota[nota])
-                #time.sleep_ms(150)
                 time.sleep(0.150)
         else:
             raise CancionNoEncontradaException("La cancion " + cancion + " no esta especificada")

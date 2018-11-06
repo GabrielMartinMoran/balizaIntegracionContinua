@@ -14,8 +14,8 @@ USUARIO = "MrKupo"
 #USUARIO = "cybercatnet"
 
 #Configuracion de Red
-SSID = "Fibertel WiFi589 2.4GHz"#"AP"
-CLAVE = "00438829825"#"Passw0rd"
+SSID = "AP"#"Fibertel WiFi589 2.4GHz"
+CLAVE = "Passw0rd"#"00438829825"
 
 ConfiguracionBaliza.instancia.get_configuracion_travis().configurar(
     USUARIO,
