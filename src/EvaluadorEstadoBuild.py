@@ -1,12 +1,6 @@
 from ClienteTravis import ClienteTravis
 from ConfiguracionBaliza import ConfiguracionBaliza
-try:
-    from ManejadorLedRGB import *
-    from ManejadorBuzzer import *
-    import _thread
-except:
-    #Si no pudo importar machine
-    pass
+from ManejadorDeEstados import ManejadorDeEstados
 import gc
 
 class EvaluadorEstadoBuild:
@@ -15,23 +9,14 @@ class EvaluadorEstadoBuild:
         self.estado_build = None
         try:
             self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
-            self.manejador_led_RGB = ManejadorLedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
-            self.manejador_buzzer = ManejadorBuzzer(ConfiguracionBaliza.instancia.get_configuracion_buzzer())
         except:
             #Si ocurre algun error de inicializacion para testing
             pass
-
-    def evaluar_estado(self):
-        estado_actual = self.clienteTravis.get_estado()
-        if(estado_actual != self.estado_build):
-            self.estado_build = estado_actual
-            print("CAMBIO DE ESTADO DEL BUILD A:",self.estado_build)
-            _thread.start_new_thread(self.activar_led,())
-            _thread.start_new_thread(self.activar_buzzer,())
-        gc.collect()
-
-    def activar_led(self):
-        self.manejador_led_RGB.set_estado(self.estado_build)
     
-    def activar_buzzer(self):
-        self.manejador_buzzer.reproducir(self.estado_build)
+    def evaluar_cambio_de_estado(self):
+        estado_actual = self.clienteTravis.get_estado()
+        hay_nuevo_estado = estado_actual != self.estado_build
+        if(hay_nuevo_estado):
+            self.estado_build = estado_actual
+        gc.collect()
+        return (hay_nuevo_estado, self.estado_build)
