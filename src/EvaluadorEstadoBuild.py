@@ -1,21 +1,15 @@
 from ClienteTravis import ClienteTravis
 from ConfiguracionBaliza import ConfiguracionBaliza
 from ManejadorDeEstados import ManejadorDeEstados
-from EstadoABuzzer import EstadoABuzzer
-from EstadoALedRGB import EstadoALedRGB
 import gc
 
 class EvaluadorEstadoBuild:
 
-    def __init__(self):
+    def __init__(self, manejador_de_estados):
         self.estado_build = None
         try:
+            self.manejador_de_estados = manejador_de_estados
             self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
-            self.manejador_de_estados = ManejadorDeEstados()
-            estadoABuzzer = EstadoABuzzer(ConfiguracionBaliza.instancia.get_configuracion_buzzer())
-            estadoALedRGB = EstadoALedRGB(ConfiguracionBaliza.instancia.get_configuracion_led_RGB())
-            self.manejador_de_estados.agregar_salida(estadoABuzzer)
-            self.manejador_de_estados.agregar_salida(estadoALedRGB)
         except:
             #Si ocurre algun error de inicializacion para testing
             pass
