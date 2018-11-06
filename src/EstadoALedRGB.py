@@ -1,5 +1,5 @@
 from EstadoBuild import EstadoBuild
-from ManejadorLedRGB import ManejadorLedRGB
+from ControladorLedRGBExtendido import ControladorLedRGBExtendido
 import ColoresLed
 
 class EstadoALedRGB:
@@ -12,7 +12,7 @@ class EstadoALedRGB:
     }
 
     def __init__(self, configuracion_led_rgb):
-        self.manejador_led_rgb = ManejadorLedRGB(configuracion_led_rgb)
+        self.manejador_led_rgb = ControladorLedRGBExtendido(configuracion_led_rgb)
     
     def set_estado(self, estado):
         self.manejador_led_rgb.parpadear(self.COLORES_ESTADOS[estado])
