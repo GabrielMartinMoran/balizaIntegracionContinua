@@ -24,6 +24,12 @@ DEPLOY_SCRIPTS = [
     ("./../../src/EstadoALedRGB.py","EstadoALedRGB.py"),
     ("./../../src/ManejadorDeEstados.py","ManejadorDeEstados.py"),
     ("./../../src/ConfiguracionBuzzer.py","ConfiguracionBuzzer.py"),
+    ("./../../src/ServidorHTTP.py","ServidorHTTP.py"),
+    ("./../../src/ServidorHTTPConfiguracion.py","ServidorHTTPConfiguracion.py"),
+    ("./../../src/plantillas_html/plantilla.html","plantillas_html/plantilla.html"),
+    ("./../../src/plantillas_html/configuracion_ci.html","plantillas_html/configuracion_ci.html"),
+    ("./../../src/plantillas_html/configuracion_red.html","plantillas_html/configuracion_red.html"),
+    ("./../../src/ConectorWiFi.py","ConectorWiFi.py"),
     ("webrepl_cfg.py","webrepl_cfg.py") #PARA CONFIGURAR WEBREPL
 ]
 

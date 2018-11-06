@@ -10,7 +10,7 @@ class ColorNoEncontradoException(Exception):
 class ControladorLedRGBExtendido:
 
     def __init__(self, configuracion_led_rgb):
-        self.controlador_led_rgb = ControladorLedRGB(configuracion_led_rgb)
+        self.controlador_led_rgb = CLRGB.ControladorLedRGB(configuracion_led_rgb)
         self.__apagar_led()
 
     def __apagar_led(self):
@@ -25,4 +25,3 @@ class ControladorLedRGBExtendido:
             time.sleep(0.2)
             self.__apagar_led()
             time.sleep(0.2)
-        self.set_color(valor_rgb)

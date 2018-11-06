@@ -1,0 +1,44 @@
+<form id="formularioRed" class="mx-2">
+    <br/>
+    <h3>Configuración de Red</h3>
+    <div class="row spacer col-lg-12 flex-wrap">
+        <div class="row col-md-4">
+            <label for="textSSID" class="col-md-4 control-label">SSID de Red</label>
+            <div>
+                <input type="text" id="textSSID" name="textSSID"/>
+            </div>
+        </div>
+        <div class="row col-md-4">
+            <label for="textClave" class="col-md-4 control-label">Clave de Red</label>
+            <div>
+                <input type="password" id="textClave" name="textClave"/>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2 col-xs-2 center-block"> 
+            <button type="button" class="btn btn-primary" onclick="submitRed()">Guardar configuración de red</button>
+        </div>
+    </div>
+</form>
+<script>
+    function submitRed() {
+        var elementos = document.getElementById("formularioRed").elements;
+        var parametros = [
+            {
+                "nombre" : "SSID",
+                "valor"  : elementos["textSSID"].value
+            },
+            {
+                "nombre" : "clave",
+                "valor"  : elementos["textClave"].value
+            }             
+        ];
+        httpGet("set_configuracion_red", parametros).then(
+            function(response){
+                console.log(response);
+            }
+        );
+    }
+</script>

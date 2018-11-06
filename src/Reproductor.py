@@ -8,15 +8,26 @@ class PorcentajeInvalidoException(Exception):
         self.mensaje = mensaje
 
 class CancionNoEncontradaException(Exception):
-
     def __init__(self, mensaje):
         self.mensaje = mensaje
 
 
 class Reproductor:
     
+=======
+class ManejadorBuzzer:
+    
+    CANCIONES_ESTADOS = {
+        EstadoBuild.PASSED:           "PASSED",
+        EstadoBuild.FAILED:           "FAILED",
+        EstadoBuild.RUNNING:          "RUNNING",
+        EstadoBuild.CONNECTION_ERROR: "CONNECTION_ERROR",
+        EstadoBuild.ACCESS_DENIED:    "ACCESS_DENIED"
+    }
+
+>>>>>>> master:src/ManejadorBuzzer.py
     def __init__(self, configuracion_buzzer):
-        self.controladorBuzzer = ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
+        self.controladorBuzzer = CB.ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
         self.controladorBuzzer.set_intensidad(self.__map__(30))
         self.nota = {"SILENCIO": 0,
                      "B0": 31,
@@ -225,6 +236,18 @@ class Reproductor:
                 else:
                     self.controladorBuzzer.set_intensidad(self.__map__(30))
                     self.controladorBuzzer.set_frecuencia(self.nota[nota])
-                time.sleep_ms(150)
+                #time.sleep_ms(150)
+                time.sleep(0.150)
         else:
             raise CancionNoEncontradaException("La cancion " + cancion + " no esta especificada")
+
+def main():
+    import ConfiguracionBuzzer
+    conf = ConfiguracionBuzzer.ConfiguracionBuzzer()
+    conf.configurar(1)
+    manejador = ManejadorBuzzer(conf)
+    manejador.reproducir("mario")
+    conf.borrar_configuracion(True)
+
+if __name__ == '__main__':
+    main()

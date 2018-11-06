@@ -1,0 +1,55 @@
+<form id="formularioTravis" class="mx-2">
+    <br/>
+    <h3>Configuración de Travis</h3>
+    <div class="row spacer col-lg-12 flex-wrap">
+        <div class="row col-md-4">
+            <label for="textUsuario" class="col-md-4 control-label">Nombre de Usuario (Git)</label>
+            <div>
+                <input type="text" id="textUsuario" name="textUsuario"/>
+            </div>
+        </div>
+        <div class="row col-md-4">
+            <label for="textRepositorio" class="col-md-4 control-label">Nombre del Repositorio</label>
+            <div>
+                <input type="text" id="textRepositorio" name="textRepositorio"/>
+            </div>
+        </div>
+        
+        <div class="row col-md-4">
+            <label for="textToken" class="col-md-4 control-label">Token de Travis</label>
+            <div>
+                <input type="text" id="textToken" name="textToken"/>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-2 col-xs-2 center-block"> 
+            <button type="button" class="btn btn-primary" onclick="submitTravis()">Guardar configuración de Travis</button>
+        </div>
+    </div>
+</form>
+<script>
+    function submitTravis() {
+        var elementos = document.getElementById("formularioTravis").elements;
+        var parametros = [
+            {
+                "nombre" : "usuario",
+                "valor"  : elementos["textUsuario"].value
+            },
+            {
+                "nombre" : "repositorio",
+                "valor"  : elementos["textRepositorio"].value
+            },
+            {
+                "nombre" : "token",
+                "valor"  : elementos["textToken"].value
+            }             
+        ];
+        httpGet("set_configuracion_travis", parametros).then(
+            function(response){
+                console.log(response);
+            }
+        );
+    }
+</script>

@@ -18,5 +18,11 @@ class EvaluadorEstadoBuild:
         hay_nuevo_estado = estado_actual != self.estado_build
         if(hay_nuevo_estado):
             self.estado_build = estado_actual
+<<<<<<< HEAD
+=======
+            print("CAMBIO DE ESTADO DEL BUILD A:",self.estado_build)
+            _thread.start_new_thread(self.activar_led,())
+            _thread.start_new_thread(self.activar_buzzer,())
+>>>>>>> master
         gc.collect()
         return (hay_nuevo_estado, self.estado_build)
