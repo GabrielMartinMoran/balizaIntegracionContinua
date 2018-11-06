@@ -1,7 +1,6 @@
 from EstadoBuild import EstadoBuild
 from ManejadorLedRGB import ManejadorLedRGB
 import ColoresLed
-import _thread
 
 class EstadoALedRGB:
     COLORES_ESTADOS = {
@@ -16,8 +15,6 @@ class EstadoALedRGB:
         self.manejador_led_rgb = ManejadorLedRGB(configuracion_led_rgb)
     
     def set_estado(self, estado):
-        _thread.start_new_thread(self.__set_estado,([self.COLORES_ESTADOS[estado]]))
+        self.manejador_led_rgb.parpadear(self.COLORES_ESTADOS[estado])
 
-    def __set_estado(self, estado):
-        self.manejador_led_rgb.set_color(estado)
 
