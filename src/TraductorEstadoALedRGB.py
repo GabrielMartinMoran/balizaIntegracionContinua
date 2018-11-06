@@ -2,7 +2,7 @@ from EstadoBuild import EstadoBuild
 from ControladorLedRGBExtendido import ControladorLedRGBExtendido
 import ColoresLed
 
-class EstadoALedRGB:
+class TraductorEstadoALedRGB:
     COLORES_ESTADOS = {
         EstadoBuild.PASSED:             ColoresLed.VERDE,
         EstadoBuild.FAILED:             ColoresLed.ROJO,
