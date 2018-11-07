@@ -27,7 +27,7 @@ if(config_red.esta_configurada()):
 from _thread import start_new_thread
 from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
 #Iniciamos el servidor HTTP
-start_new_thread(ServidorHTTPConfiguracion,("127.0.0.1",8081,config_travis, config_red))
+start_new_thread(ServidorHTTPConfiguracion,("192.168.4.1",80,config_travis, config_red))
 
 import LoopPrincipal
 #Iniciamos el loop principal

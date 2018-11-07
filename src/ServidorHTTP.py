@@ -46,7 +46,7 @@ class ServidorHTTP():
         data = url.replace('?',' ')
         data = data.replace('&',' ')
         return data.split(' ')
-
+    
     def __atender_request(self, request_str):
         data = request_str[4:].split(' ')[0]
         request_data = self.__dividir_url(data)
@@ -68,7 +68,16 @@ class ServidorHTTP():
         decoded_data = data.decode('utf-8')
         response = None
         if(self.__es_request(decoded_data)):
-            response = self.__atender_request(decoded_data)
+            #__atender_request
+            request_str = decoded_data
+            data = request_str[4:].split(' ')[0]
+            request_data = self.__dividir_url(data)
+            url = request_data[0]
+            parametros = self.__mapear_parametros(request_data[1:])
+            if(self.__imprimir_log):
+                print("REQUEST TO:",url)
+            #__atender_request
+            response = self.__rutear(url,parametros)
         conexion.sendall(response.encode('utf-8'))
         response = None
         conexion.close()
