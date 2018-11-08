@@ -10,8 +10,8 @@ import unittest
 import requests
 from ServidorHTTP import ServidorHTTP
 
-HOST = "127.0.0.1"
-PUERTO = 80
+HOST = "localhost"
+PUERTO = 8181
 
 class TestServidorHTTP(unittest.TestCase):
 

@@ -1,9 +1,13 @@
 import socket
 import gc
 from _thread import start_new_thread
+from time import sleep
 
 class ServidorHTTP():
 
+    __servidor_iniciado = False
+    __clientes_conectados = 0
+    
     def __init__(self, host, puerto, clientes_maximos = 5, imprimir_log = False):
         self.__configurar(host, puerto, clientes_maximos, imprimir_log)
         self.__ruteos = {}
@@ -19,6 +23,7 @@ class ServidorHTTP():
         self.__servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.__servidor.bind((self.__host, self.__puerto))
         self.__servidor.listen(self.__clientes_maximos)
+        self.__servidor_iniciado = True
         if(self.__imprimir_log):
             print('Iniciado servidor en host:', self.__host, "puerto:", self.__puerto)
         if(threaded):
@@ -27,12 +32,19 @@ class ServidorHTTP():
             self.__escuchar_clientes()
 
     def __es_request(self, string):
-        if(string[:3]=='GET'):
-            return True
-        return False
+        #TODO agregar los demas metodos HTTP
+        return string[:3]=='GET'
 
     def detener(self):
-        self.__servidor.shutdown(1)
+        self.__servidor_iniciado = False
+        #Esperamos a que no este atendiendo mas clientes
+        while(self.__clientes_conectados > 0):
+            sleep(0.01)
+        try:
+            self.__servidor.shutdown(socket.SHUT_RDWR)
+        except:
+            #Cuando utiliza UDP
+            pass
         self.__servidor.close()
 
     def __mapear_parametros(self, parametros):
@@ -47,6 +59,8 @@ class ServidorHTTP():
         data = data.replace('&',' ')
         return data.split(' ')
     
+    """
+    #En desuso debido a problema de profundidad de recursion
     def __atender_request(self, request_str):
         data = request_str[4:].split(' ')[0]
         request_data = self.__dividir_url(data)
@@ -55,8 +69,11 @@ class ServidorHTTP():
         if(self.__imprimir_log):
             print("REQUEST TO:",url)
         return self.__rutear(url,parametros)
+    """
 
     def __atender_cliente(self, conexion):
+        #Agregamos el cliente como conectado
+        self.__clientes_conectados += 1
         cl_file = conexion.makefile('rwb', 0)
         data = b''
         while True:
@@ -66,7 +83,7 @@ class ServidorHTTP():
             data += line
         
         decoded_data = data.decode('utf-8')
-        response = None
+        response = ""
         if(self.__es_request(decoded_data)):
             #__atender_request
             request_str = decoded_data
@@ -82,10 +99,16 @@ class ServidorHTTP():
         response = None
         conexion.close()
         gc.collect()
+        #Quitamos este cliente
+        self.__clientes_conectados -= 1
 
     def __escuchar_clientes(self):
-        while True:
-            conexion, addr = self.__servidor.accept()
+        while self.__servidor_iniciado:
+            try:
+                conexion, addr = self.__servidor.accept()
+            except:
+                #Posible error cuando se cierra el socket
+                break
             if(self.__imprimir_log):
                 print('Cliente conectado desde:', addr)
             start_new_thread(self.__atender_cliente,(conexion,))

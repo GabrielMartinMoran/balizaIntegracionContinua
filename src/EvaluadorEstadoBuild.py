@@ -7,11 +7,7 @@ class EvaluadorEstadoBuild:
 
     def __init__(self):
         self.estado_build = None
-        try:
-            self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
-        except:
-            #Si ocurre algun error de inicializacion para testing
-            pass
+        self.clienteTravis = ClienteTravis(ConfiguracionBaliza.instancia.get_configuracion_travis())
     
     def evaluar_cambio_de_estado(self):
         estado_actual = self.clienteTravis.get_estado()
