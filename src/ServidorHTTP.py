@@ -85,16 +85,7 @@ class ServidorHTTP():
         decoded_data = data.decode('utf-8')
         response = ""
         if(self.__es_request(decoded_data)):
-            #__atender_request
-            request_str = decoded_data
-            data = request_str[4:].split(' ')[0]
-            request_data = self.__dividir_url(data)
-            url = request_data[0]
-            parametros = self.__mapear_parametros(request_data[1:])
-            if(self.__imprimir_log):
-                print("REQUEST TO:",url)
-            #__atender_request
-            response = self.__rutear(url,parametros)
+            response = self.__atender_request(decoded_data)
         conexion.sendall(response.encode('utf-8'))
         response = None
         conexion.close()

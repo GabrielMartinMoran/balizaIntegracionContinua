@@ -31,7 +31,7 @@ from _thread import start_new_thread
 from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
 #Iniciamos el servidor HTTP
 start_new_thread(ServidorHTTPConfiguracion,(IP_HOST_CONFIGURACION, PUERTO_HOST_CONFIGURACION, config_travis, config_red))
-
+start_new_thread(ServidorHTTPConfiguracion,("127.0.0.1",8081,config_travis, config_red))
 import LoopPrincipal
 #Iniciamos el loop principal
 LoopPrincipal.iniciar()
