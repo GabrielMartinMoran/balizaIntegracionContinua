@@ -1,8 +1,7 @@
-import network
-import webrepl
-import time
+from network import WLAN, AP_IF, AUTH_WPA_WPA2_PSK
+from webrepl import start
 
-webrepl.start()
-ap_if = network.WLAN(network.AP_IF)
+start()
+ap_if = WLAN(AP_IF)
 ap_if.active(True)
-ap_if.config(essid='ESP32', authmode=network.AUTH_WPA_WPA2_PSK, password='micropython')
+ap_if.config(essid='ESP32', authmode=AUTH_WPA_WPA2_PSK, password='micropython')

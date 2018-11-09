@@ -17,7 +17,6 @@ DEPLOY_SCRIPTS = [
     ("./../../src/ControladorLed.py","ControladorLed.py"),
     ("./../../src/ControladorLedRGB.py","ControladorLedRGB.py"),
     ("./../../src/ControladorLedRGBExtendido.py","ControladorLedRGBExtendido.py"),
-    ("./../../src/ColoresLed.py","ColoresLed.py"),
     ("./../../src/ControladorBuzzer.py","ControladorBuzzer.py"),
     ("./../../src/ReproductorMusical.py","ReproductorMusical.py"),
     ("./../../src/TraductorEstadoABuzzer.py","TraductorEstadoABuzzer.py"),
@@ -34,6 +33,7 @@ DEPLOY_SCRIPTS = [
     ("./../../src/resources/NotasMusicales.json","resources/NotasMusicales.json"),
     ("./../../src/resources/Canciones.json","resources/Canciones.json"),
     ("./../../src/ConectorWiFi.py","ConectorWiFi.py"),
+    ("./../../src/ImportadorMultiplataforma.py","ImportadorMultiplataforma.py"),
     ("webrepl_cfg.py","webrepl_cfg.py") #PARA CONFIGURAR WEBREPL
 ]
 

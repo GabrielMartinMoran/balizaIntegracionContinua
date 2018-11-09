@@ -21,4 +21,9 @@ class ControladorLedRGB:
             time.sleep(0.01)
 
     def set_rgb(self, rgb):
-        self.__color_fondo = '#%02x%02x%02x' % rgb
+        try:
+            #WINDOWS
+            self.__color_fondo = '#%02x%02x%02x' % rgb
+        except:
+            #LINUX
+            self.__color_fondo = "#{:02x}{:02x}{:02x}".format(rgb[0],rgb[1],rgb[2])

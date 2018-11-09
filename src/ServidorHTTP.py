@@ -1,14 +1,15 @@
 import socket
-import gc
+from gc import collect
 from _thread import start_new_thread
 from time import sleep
+collect()
 
 class ServidorHTTP():
 
     __servidor_iniciado = False
     __clientes_conectados = 0
     
-    def __init__(self, host, puerto, clientes_maximos = 5, imprimir_log = False):
+    def __init__(self, host, puerto, clientes_maximos = 1, imprimir_log = False):
         self.__configurar(host, puerto, clientes_maximos, imprimir_log)
         self.__ruteos = {}
     
@@ -86,19 +87,21 @@ class ServidorHTTP():
         response = ""
         if(self.__es_request(decoded_data)):
             #__atender_request
-            request_str = decoded_data
-            data = request_str[4:].split(' ')[0]
+            data = decoded_data[4:].split(' ')[0]
             request_data = self.__dividir_url(data)
             url = request_data[0]
             parametros = self.__mapear_parametros(request_data[1:])
             if(self.__imprimir_log):
                 print("REQUEST TO:",url)
+            decoded_data = None
+            collect()
             #__atender_request
             response = self.__rutear(url,parametros)
         conexion.sendall(response.encode('utf-8'))
-        response = None
         conexion.close()
-        gc.collect()
+        response = None
+        conexion = None
+        collect()
         #Quitamos este cliente
         self.__clientes_conectados -= 1
 

@@ -1,4 +1,4 @@
-import machine
+from machine import PWM, Pin
 
 class IntensidadPWMInvalidaException(Exception):
     def __init__(self, mensaje):
@@ -10,7 +10,7 @@ class FrecuenciaPWMInvalidaException(Exception):
 
 class ControladorBuzzer:
     def __init__(self, pin_buzzer):
-        self.pin_buzzer = machine.PWM(machine.Pin(pin_buzzer))
+        self.pin_buzzer = PWM(Pin(pin_buzzer))
         self.set_intensidad(0)
         self.set_frecuencia(2000)
 

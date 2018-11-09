@@ -1,5 +1,5 @@
-import json
-import os
+from json import loads, dumps
+from os import getcwd, remove, listdir
 
 class Configuracion:
 
@@ -29,34 +29,30 @@ class Configuracion:
         return True
 
     def __get_path_archivo_configuracion(self):
-        #path_scipt = os.path.realpath(__file__)
-        #path_directorio = os.path.dirname(path_scipt)
-        #return os.path.join(path_directorio, self._ARCHIVO_CONFIGURACION)
-        return os.getcwd() + '/' + self._ARCHIVO_CONFIGURACION
+        return getcwd() + '/' + self._ARCHIVO_CONFIGURACION
 
     def _guardar_archivo_configuracion(self):
         f = open(self.__get_path_archivo_configuracion(), "w")
-        f.write(json.dumps(self._data))
+        f.write(dumps(self._data))
         f.close()
     
     def _cargar_archivo_configuracion(self):
         if(not self.existe_archivo_configuracion()):
             return False
         f = open(self.__get_path_archivo_configuracion(),"r")
-        self._data = json.loads(f.read())
+        self._data = loads(f.read())
         f.close()
 
     def __borrar_archivo_configuracion(self):
         if(self.existe_archivo_configuracion()):
-            os.remove(self.__get_path_archivo_configuracion())
+            remove(self.__get_path_archivo_configuracion())
 
     """
     Devuelve True si existe guardado un archivo de configuracion
     """
     def existe_archivo_configuracion(self):
-        lista_directorio = os.listdir()
+        lista_directorio = listdir()
         return self._ARCHIVO_CONFIGURACION in lista_directorio
-        #return os.path.isfile(self.__get_path_archivo_configuracion())
 
     """
     Borra la configuracion actual y si el parametro borrar_archivo_configuracion esta en True tambien elimina el archivo guardado
