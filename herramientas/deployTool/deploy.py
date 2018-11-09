@@ -22,6 +22,7 @@ DEPLOY_SCRIPTS = [
     ("./../../src/Reproductor.py","Reproductor.py"),
     ("./../../src/TraductorEstadoABuzzer.py","TraductorEstadoABuzzer.py"),
     ("./../../src/TraductorEstadoALedRGB.py","TraductorEstadoALedRGB.py"),
+    ("./../../src/TraductorEstadoAConsola.py","TraductorEstadoAConsola.py"),
     ("./../../src/ManejadorDeEstados.py","ManejadorDeEstados.py"),
     ("./../../src/ConfiguracionBuzzer.py","ConfiguracionBuzzer.py"),
     ("./../../src/ServidorHTTP.py","ServidorHTTP.py"),
