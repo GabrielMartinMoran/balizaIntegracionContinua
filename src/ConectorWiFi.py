@@ -18,8 +18,8 @@ class ConectorWiFi:
         self.__sta_if.active(True)
 
     def conectar(self):
-        self.__sta_if.disconnect()
         self.__inicializar_estacion()
+        self.__sta_if.disconnect()
         cantidad_intentos_conexion = 1
         while(not self.esta_conectado()):
             print("Tratando de conectarse a la red",self.__configuracion_red.get_SSID())
