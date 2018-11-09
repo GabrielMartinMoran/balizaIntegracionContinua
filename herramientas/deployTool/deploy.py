@@ -30,6 +30,9 @@ DEPLOY_SCRIPTS = [
     ("./../../src/plantillas_html/plantilla.html","plantillas_html/plantilla.html"),
     ("./../../src/plantillas_html/configuracion_ci.html","plantillas_html/configuracion_ci.html"),
     ("./../../src/plantillas_html/configuracion_red.html","plantillas_html/configuracion_red.html"),
+    ("./../../src/resources/ColoresLed.json","resources/ColoresLed.json"),
+    ("./../../src/resources/NotasMusicales.json","resources/NotasMusicales.json"),
+    ("./../../src/resources/Canciones.json","resources/Canciones.json"),
     ("./../../src/ConectorWiFi.py","ConectorWiFi.py"),
     ("webrepl_cfg.py","webrepl_cfg.py") #PARA CONFIGURAR WEBREPL
 ]
