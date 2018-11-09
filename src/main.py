@@ -1,6 +1,9 @@
 #Archivo main del ESP32
 from ConfiguracionBaliza import ConfiguracionBaliza
 
+IP_HOST_CONFIGURACION = "localhost"#"192.168.4.1"
+PUERTO_HOST_CONFIGURACION = 8008#80
+
 #Instanciamos el singleton de configuracion
 configuracionBaliza = ConfiguracionBaliza()
 
@@ -27,7 +30,7 @@ if(config_red.esta_configurada()):
 from _thread import start_new_thread
 from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
 #Iniciamos el servidor HTTP
-start_new_thread(ServidorHTTPConfiguracion,("192.168.4.1",80,config_travis, config_red))
+start_new_thread(ServidorHTTPConfiguracion,(IP_HOST_CONFIGURACION, PUERTO_HOST_CONFIGURACION, config_travis, config_red))
 
 import LoopPrincipal
 #Iniciamos el loop principal

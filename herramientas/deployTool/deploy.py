@@ -19,7 +19,7 @@ DEPLOY_SCRIPTS = [
     ("./../../src/ControladorLedRGBExtendido.py","ControladorLedRGBExtendido.py"),
     ("./../../src/ColoresLed.py","ColoresLed.py"),
     ("./../../src/ControladorBuzzer.py","ControladorBuzzer.py"),
-    ("./../../src/Reproductor.py","Reproductor.py"),
+    ("./../../src/ReproductorMusical.py","ReproductorMusical.py"),
     ("./../../src/TraductorEstadoABuzzer.py","TraductorEstadoABuzzer.py"),
     ("./../../src/TraductorEstadoALedRGB.py","TraductorEstadoALedRGB.py"),
     ("./../../src/TraductorEstadoAConsola.py","TraductorEstadoAConsola.py"),

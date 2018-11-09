@@ -1,7 +1,7 @@
 import ImportadorMultiplataforma
 CLRGB = ImportadorMultiplataforma.importar("ControladorLedRGB")
 import ColoresLed
-import time
+from time import sleep
 
 class ColorNoEncontradoException(Exception):
     def __init__(self, mensaje):
@@ -23,9 +23,9 @@ class ControladorLedRGBExtendido:
     def parpadear(self, valor_rgb):
         for i in range(3):
             self.set_color(valor_rgb)
-            time.sleep(0.2)
+            sleep(0.2)
             self.__apagar_led()
-            time.sleep(0.2)
+            sleep(0.2)
         self.set_color(valor_rgb)
 
 def main():
