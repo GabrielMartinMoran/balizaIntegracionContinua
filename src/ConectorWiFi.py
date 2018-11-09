@@ -1,4 +1,5 @@
 from time import sleep
+from gc import collect
 import ImportadorMultiplataforma
 network = ImportadorMultiplataforma.importar("network")
 
@@ -13,9 +14,11 @@ class ConectorWiFi:
 
     def __inicializar_estacion(self):
         self.__sta_if = network.WLAN(network.STA_IF)
+        collect()
         self.__sta_if.active(True)
 
     def conectar(self):
+        self.__sta_if.disconnect()
         self.__inicializar_estacion()
         cantidad_intentos_conexion = 1
         while(not self.esta_conectado()):

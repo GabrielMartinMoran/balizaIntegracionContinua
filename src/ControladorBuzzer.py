@@ -12,7 +12,7 @@ class ControladorBuzzer:
     def __init__(self, pin_buzzer):
         self.pin_buzzer = machine.PWM(machine.Pin(pin_buzzer))
         self.set_intensidad(0)
-        self.set_frecuencia(1)
+        self.set_frecuencia(2000)
 
     def set_intensidad(self, intensidad):
         if(intensidad < 0 or intensidad > 1023):
