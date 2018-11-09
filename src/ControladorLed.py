@@ -1,4 +1,4 @@
-import machine
+from machine import PWM, Pin
 
 
 class IntensidadPWMInvalidaException(Exception):
@@ -9,7 +9,7 @@ class IntensidadPWMInvalidaException(Exception):
 
 class ControladorLed:
     def __init__(self, pin_led):
-        self.pin_led = machine.PWM(machine.Pin(pin_led))
+        self.pin_led = PWM(Pin(pin_led))
         self.set_intensidad(0)
 
     def set_intensidad(self, intensidad):

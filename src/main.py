@@ -1,8 +1,8 @@
 #Archivo main del ESP32
 from ConfiguracionBaliza import ConfiguracionBaliza
 
-IP_HOST_CONFIGURACION = "192.168.4.1"
-PUERTO_HOST_CONFIGURACION = 80
+IP_HOST_CONFIGURACION = "192.168.4.1"#"localhost"
+PUERTO_HOST_CONFIGURACION = 80#8080
 
 #Instanciamos el singleton de configuracion
 configuracionBaliza = ConfiguracionBaliza()

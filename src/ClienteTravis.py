@@ -1,9 +1,10 @@
-import json
+from json import loads
 from ClienteCI import *
 from EstadoBuild import EstadoBuild
-import gc
+from gc import collect
 import HttpRequests
 from ConfiguracionTravis import ConfiguracionTravis
+collect()
 
 class ClienteTravis(ClienteCI):    
 
@@ -46,7 +47,7 @@ class ClienteTravis(ClienteCI):
         if(response == "access denied"):         
             return EstadoBuild.ACCESS_DENIED
         #Transformamos el response a JSON
-        response_json = json.loads(response)
+        response_json = loads(response)
         #Cuando ocurre un error al estar mal el nombre de usuario o el repositorio
         if('error_type' in response_json):
             return EstadoBuild.CONNECTION_ERROR
@@ -65,5 +66,5 @@ class ClienteTravis(ClienteCI):
             return EstadoBuild.CONNECTION_ERROR
         estado = self.__obtener_estado(response)
         #Ejecutamos el Garbage Collector
-        gc.collect()
+        collect()
         return estado

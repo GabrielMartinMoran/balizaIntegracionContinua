@@ -1,7 +1,8 @@
 from ClienteTravis import ClienteTravis
 from ConfiguracionBaliza import ConfiguracionBaliza
 from ManejadorDeEstados import ManejadorDeEstados
-import gc
+from gc import collect
+collect()
 
 class EvaluadorEstadoBuild:
 
@@ -14,5 +15,5 @@ class EvaluadorEstadoBuild:
         hay_nuevo_estado = estado_actual != self.estado_build
         if(hay_nuevo_estado):
             self.estado_build = estado_actual
-        gc.collect()
+        collect()
         return (hay_nuevo_estado, self.estado_build)
