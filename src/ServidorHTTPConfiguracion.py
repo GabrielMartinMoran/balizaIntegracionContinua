@@ -1,5 +1,5 @@
 from ServidorHTTP import *
-import json
+from json import dumps
 
 PATH_CARPETA_PLANTILLAS = "./plantillas_html/"
 PLANTILLA_HTML = PATH_CARPETA_PLANTILLAS + "plantilla.html"
@@ -58,14 +58,14 @@ class ServidorHTTPConfiguracion:
             "token" : self.__configuracion_travis.get_token(),
             "APIurl" : self.__configuracion_travis.get_api_url()
         }
-        return json.dumps(response)
+        return dumps(response)
 
     def get_configuracion_red(self, parametros):
         response = {
             "SSID" : self.__configuracion_red.get_SSID(),
             "clave" : self.__configuracion_red.get_clave(),
         }
-        return json.dumps(response)
+        return dumps(response)
 
     def detener(self):
         self.__servidor_HTTP.detener()

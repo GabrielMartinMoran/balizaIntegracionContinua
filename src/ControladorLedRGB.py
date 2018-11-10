@@ -1,4 +1,4 @@
-from ControladorLed import *
+from ControladorLed import ControladorLed
 
 class IntensidadInvalidaException(Exception):
 

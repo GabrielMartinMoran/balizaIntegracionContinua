@@ -1,12 +1,12 @@
-import sys
+from sys import platform
 
 def __get_nombre_plataforma():
-    if(sys.platform == "esp32"):
+    if(platform == "esp32"):
         return "MICROPYTHON"
     return "PYTHON"
 
 if __get_nombre_plataforma() == "PYTHON":
-    import os
+    import os, sys
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/mockups')))
 
 MODULOS = {
