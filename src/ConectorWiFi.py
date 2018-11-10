@@ -17,7 +17,7 @@ class ConectorWiFi:
         collect()
         self.__sta_if.active(True)
 
-    def conectar(self):
+    def conectar(self, cantidad_intentos = -1):
         self.__inicializar_estacion()
         self.__sta_if.disconnect()
         cantidad_intentos_conexion = 1
@@ -26,6 +26,8 @@ class ConectorWiFi:
             print("\nIntento número",cantidad_intentos_conexion)
             self.__sta_if.connect(self.__configuracion_red.get_SSID(), self.__configuracion_red.get_clave())
             cantidad_intentos_conexion += 1
+            if(cantidad_intentos_conexion == cantidad_intentos):
+                break
             sleep(self.__tiempo_entre_intentos)
         print("Se ha establecido la conexión con la red:",self.__configuracion_red.get_SSID())
 

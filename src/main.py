@@ -25,7 +25,7 @@ config_buzzer.configurar(
 from ConectorWiFi import ConectorWiFi
 conector_wifi = ConectorWiFi(config_red)
 if(config_red.esta_configurada()):
-    conector_wifi.conectar()
+    conector_wifi.conectar(cantidad_intentos = 5)
 
 from _thread import start_new_thread
 from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
