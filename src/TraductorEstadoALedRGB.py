@@ -1,5 +1,5 @@
 from EstadoBuild import EstadoBuild
-from ControladorLedRGBExtendido import ControladorLedRGBExtendido
+from ManejadorLedRGB import ManejadorLedRGB
 
 class EstadoNoEspecificadoException(Exception):
     def __init__(self, mensaje):
@@ -15,10 +15,10 @@ class TraductorEstadoALedRGB:
     }
 
     def __init__(self, configuracion_led_rgb):
-        self.__controlador_led_rgb_extendido = ControladorLedRGBExtendido(configuracion_led_rgb)
+        self.__manejador_led_rgb = ManejadorLedRGB(configuracion_led_rgb)
     
     def set_estado(self, estado):
         if(estado in self.__COLORES_ESTADOS):
-            self.__controlador_led_rgb_extendido.parpadear(self.__COLORES_ESTADOS[estado])
+            self.__manejador_led_rgb.parpadear(self.__COLORES_ESTADOS[estado])
         else:
             raise EstadoNoEspecificadoException("El estado " + estado + " no esta especificado")

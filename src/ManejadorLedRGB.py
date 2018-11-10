@@ -9,7 +9,7 @@ class ColorNoEncontradoException(Exception):
         self.mensaje = mensaje
 
 
-class ControladorLedRGBExtendido:
+class ManejadorLedRGB:
 
     def __init__(self, configuracion_led_rgb):
         self.__COLORES_LED = self.__obtener_recurso_json("ColoresLed.json")

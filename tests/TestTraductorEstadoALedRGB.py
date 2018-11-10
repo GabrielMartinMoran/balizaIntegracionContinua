@@ -26,7 +26,7 @@ class TestTraductorEstadoALedRGB(unittest.TestCase):
         manejador_led_rgb = ManejadorLedRGBMockup()
         traductor = TraductorEstadoALedRGB(configuracion)
         #Cambiamos el reproductor que posee por el mockup
-        traductor._TraductorEstadoALedRGB__controlador_led_rgb_extendido = manejador_led_rgb
+        traductor._TraductorEstadoALedRGB__manejador_led_rgb = manejador_led_rgb
 
         traductor.set_estado(EstadoBuild.PASSED)
 
