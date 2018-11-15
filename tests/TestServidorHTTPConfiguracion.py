@@ -22,7 +22,7 @@ class TestServidorHTTPConfiguracion(unittest.TestCase):
         configuracion_ci = ConfiguracionCI()
         servidor = ServidorHTTPConfiguracion(HOST, PUERTO_1, configuracion_ci, None)
 
-        response = requests.get("http://"+HOST+":"+str(PUERTO_1)+"/set_configuracion_ci?usuario=USUARIO&repositorio=REPOSITORIO&token=TOKEN&APIurl=http://test.url")
+        response = requests.get("http://"+HOST+":"+str(PUERTO_1)+"/set_configuracion_ci?usuario=USUARIO&repositorio=REPOSITORIO&token=TOKEN&APIurl=http://test.url&servidorCI=Travis")
         
         self.assertEqual("USUARIO", configuracion_ci.get_usuario())
         self.assertEqual("REPOSITORIO", configuracion_ci.get_repositorio())
