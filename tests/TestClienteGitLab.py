@@ -6,27 +6,27 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 #--------------------------------------------------------------------------------------
 
-import ClienteTravis
+import ClienteGitLab
 import unittest
 import requests
 from EstadoBuild import EstadoBuild
 from ConfiguracionCI import ConfiguracionCI
 
-TRAVIS_API_URL = "http://127.0.0.1:8080" #URL del Mockup de Travis
+GITLAB_API_URL = "http://127.0.0.1:8080" #URL del Mockup de GitLab
 API_URL_INVALIDA = "http://URL_NO_VALIDA:123456"
-TOKEN_CORRECTO = "9cHb1xMQyaGSSSsi6xTW5Q"
+TOKEN_CORRECTO = "_6ExBju88GSiQvq-m4Rc"
 TOKEN_INCORRECTO = "ash8y12iugi1u2kkh"
-REPOSITORIO = "dyasc-2018"
+REPOSITORIO = "test_ci"
 USUARIO = "MrKupo"
 
-class TestClienteTravis(unittest.TestCase):
+class TestClienteGitLab(unittest.TestCase):
 
-	def test_hacemos_un_request_con_credenciales_correctas_y_build_passed(self):
+	def test_hacemos_un_request_con_credenciales_correctas_y_build_success(self):
 		configuracion = ConfiguracionCI()
-		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,TRAVIS_API_URL)
+		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,GITLAB_API_URL)
 		#Seteamos el mock para que devuelva Passed
-		requests.get(TRAVIS_API_URL + "/set_status/passed")
-		cliente = ClienteTravis.ClienteTravis(configuracion)
+		requests.get(GITLAB_API_URL + "/set_status/success")
+		cliente = ClienteGitLab.ClienteGitLab(configuracion)
 
 		estado = cliente.get_estado()
 
@@ -34,21 +34,21 @@ class TestClienteTravis(unittest.TestCase):
 
 	def test_hacemos_un_request_con_credenciales_correctas_y_build_failed(self):
 		configuracion = ConfiguracionCI()
-		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,TRAVIS_API_URL)
+		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,GITLAB_API_URL)
 		#Seteamos el mock para que devuelva Failed
-		requests.get(TRAVIS_API_URL + "/set_status/failed")
-		cliente = ClienteTravis.ClienteTravis(configuracion)
+		requests.get(GITLAB_API_URL + "/set_status/failed")
+		cliente = ClienteGitLab.ClienteGitLab(configuracion)
 
 		estado = cliente.get_estado()
 
 		self.assertEqual(EstadoBuild.FAILED, estado)
 
-	def test_hacemos_un_request_con_credenciales_correctas_y_build_created(self):
+	def test_hacemos_un_request_con_credenciales_correctas_y_build_running(self):
 		configuracion = ConfiguracionCI()
-		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,TRAVIS_API_URL)
+		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO,GITLAB_API_URL)
 		#Seteamos el mock para que devuelva Created
-		requests.get(TRAVIS_API_URL + "/set_status/created")
-		cliente = ClienteTravis.ClienteTravis(configuracion)
+		requests.get(GITLAB_API_URL + "/set_status/running")
+		cliente = ClienteGitLab.ClienteGitLab(configuracion)
 
 		estado = cliente.get_estado()
 
@@ -56,8 +56,8 @@ class TestClienteTravis(unittest.TestCase):
 
 	def test_hacemos_un_request_con_credenciales_incorrectas(self):
 		configuracion = ConfiguracionCI()
-		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_INCORRECTO,TRAVIS_API_URL)
-		cliente = ClienteTravis.ClienteTravis(configuracion)
+		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_INCORRECTO,GITLAB_API_URL)
+		cliente = ClienteGitLab.ClienteGitLab(configuracion)
 
 		estado = cliente.get_estado()
 
@@ -66,7 +66,7 @@ class TestClienteTravis(unittest.TestCase):
 	def test_hacemos_un_request_a_un_servidor_incorrecto(self):
 		configuracion = ConfiguracionCI()
 		configuracion.configurar(USUARIO,REPOSITORIO,TOKEN_CORRECTO, API_URL_INVALIDA)
-		cliente = ClienteTravis.ClienteTravis(configuracion)
+		cliente = ClienteGitLab.ClienteGitLab(configuracion)
 
 		estado = cliente.get_estado()
 
@@ -74,10 +74,10 @@ class TestClienteTravis(unittest.TestCase):
 
 def main():
 	try:
-		response = requests.get(TRAVIS_API_URL + "/set_status/passed")
+		response = requests.get(GITLAB_API_URL + "/set_status/success")
 		response.close()
 	except requests.exceptions.ConnectionError:
-		print("ERROR: No es posible ejecutar las pruebas si el Servidor Mockup de Travis no esta corriendo en",TRAVIS_API_URL)
+		print("ERROR: No es posible ejecutar las pruebas si el Servidor Mockup de GitLab no esta corriendo en",GITLAB_API_URL)
 		return
 	unittest.main()
 

@@ -8,4 +8,4 @@ utils/buzzer/program.py
 configuracion_buzzer.json
 configuracion_Led_RGB.json
 configuracion_red.json
-configuracion_travis.json
+configuracion_ci.json

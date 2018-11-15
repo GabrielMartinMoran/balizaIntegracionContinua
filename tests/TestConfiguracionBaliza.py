@@ -23,11 +23,11 @@ class TestConfiguracionBaliza(unittest.TestCase):
 
 		configuracion = ConfiguracionBaliza()
 		
-		configuracion_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
+		configuracion_ci = ConfiguracionBaliza.instancia.get_configuracion_ci()
 		configuracion_red = ConfiguracionBaliza.instancia.get_configuracion_red()
 		configuracion_led_RGB = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
 
-		self.assertEqual(ConfiguracionTravis, type(configuracion_travis))
+		self.assertEqual(ConfiguracionCI, type(configuracion_ci))
 		self.assertEqual(ConfiguracionRed, type(configuracion_red))
 		self.assertEqual(ConfiguracionLedRGB, type(configuracion_led_RGB))
 
@@ -40,11 +40,11 @@ class TestConfiguracionBaliza(unittest.TestCase):
 	def test_creamos_una_configuracion_baliza_cuando_no_existe_archivo_de_configuracion_baliza_y_preguntamos_si_cada_subconfiguracion_esta_configurada(self):
 		configuracion = ConfiguracionBaliza()
 		
-		configuracion_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
+		configuracion_ci = ConfiguracionBaliza.instancia.get_configuracion_ci()
 		configuracion_red = ConfiguracionBaliza.instancia.get_configuracion_red()
 		configuracion_led_RGB = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
 
-		conf_travis_configurada = configuracion_travis.esta_configurada()
+		conf_travis_configurada = configuracion_ci.esta_configurada()
 		conf_red_configurada = configuracion_red.esta_configurada()
 		conf_GPIO_configurada = configuracion_led_RGB.esta_configurada()
 

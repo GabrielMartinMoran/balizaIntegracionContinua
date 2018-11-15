@@ -7,7 +7,7 @@ PUERTO_HOST_CONFIGURACION = 80#8080
 #Instanciamos el singleton de configuracion
 configuracionBaliza = ConfiguracionBaliza()
 
-config_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
+config_travis = ConfiguracionBaliza.instancia.get_configuracion_ci()
 config_red = ConfiguracionBaliza.instancia.get_configuracion_red()
 config_led_rgb = ConfiguracionBaliza.instancia.get_configuracion_led_RGB()
 config_buzzer = ConfiguracionBaliza.instancia.get_configuracion_buzzer()

@@ -6,18 +6,18 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 #--------------------------------------------------------------------------------------
 
-from ConfiguracionTravis import *
+from ConfiguracionCI import *
 import unittest
 
-def borrar_configuracion_travis_previa():
+def borrar_configuracion_ci_previa():
 	#Borramos el archivo de configuracion que exista para que no haya basura al iniciar los tests
-	conf = ConfiguracionTravis()
+	conf = ConfiguracionCI()
 	conf.borrar_configuracion(True)
 
-class TestConfiguracionTravis(unittest.TestCase):	
+class TestConfiguracionCI(unittest.TestCase):	
     
-	def test_creamos_una_configuracion_travis_cuando_no_existe_archivo_de_configuracion_travis_y_preguntamos_si_esta_configurada(self):
-		configuracion = ConfiguracionTravis()
+	def test_creamos_una_configuracion_ci_cuando_no_existe_archivo_de_configuracion_ci_y_preguntamos_si_esta_configurada(self):
+		configuracion = ConfiguracionCI()
 		
 		configurada = configuracion.esta_configurada()
 
@@ -26,10 +26,10 @@ class TestConfiguracionTravis(unittest.TestCase):
 		#LIMPIAMOS LA CONFIGURACION RESULTANTE
 		configuracion.borrar_configuracion(True)
 
-	def test_zzcreamos_una_configuracion_travis_cuando_existe_archivo_de_configuracion_travis_y_corroboramos_que_este_configurada(self):
-		configuracion = ConfiguracionTravis()
+	def test_zzcreamos_una_configuracion_ci_cuando_existe_archivo_de_configuracion_ci_y_corroboramos_que_este_configurada(self):
+		configuracion = ConfiguracionCI()
 		configuracion.configurar("usuario","repositorio","token")
-		configuracion_nueva = ConfiguracionTravis()
+		configuracion_nueva = ConfiguracionCI()
 		
 		configurada = configuracion_nueva.esta_configurada()
 
@@ -39,7 +39,7 @@ class TestConfiguracionTravis(unittest.TestCase):
 		configuracion.borrar_configuracion(True)
 
 	def test_establecemos_la_cofiguracion_y_corroboramos_que_este_configurada(self):
-		configuracion = ConfiguracionTravis()
+		configuracion = ConfiguracionCI()
 		configuracion.configurar("usuario","repositorio","token")
 		
 		configurada = configuracion.esta_configurada()
@@ -49,8 +49,8 @@ class TestConfiguracionTravis(unittest.TestCase):
 		#LIMPIAMOS LA CONFIGURACION RESULTANTE
 		configuracion.borrar_configuracion(True)
 
-	def test_borramos_la_configuracion_travis_existente_y_corroboramos_que_no_este_configurada(self):
-		configuracion = ConfiguracionTravis()
+	def test_borramos_la_configuracion_ci_existente_y_corroboramos_que_no_este_configurada(self):
+		configuracion = ConfiguracionCI()
 		configuracion.configurar("usuario","repositorio","token")
 		configuracion.borrar_configuracion(True)
 
@@ -59,8 +59,8 @@ class TestConfiguracionTravis(unittest.TestCase):
 		self.assertEqual(False, configurada)
 
 
-	def test_creamos_una_nueva_configuracion_travis_solo_configuramos_algunos_parametros_y_corroboramos_que_este_como_no_configurada(self):
-		configuracion = ConfiguracionTravis()
+	def test_creamos_una_nueva_configuracion_ci_solo_configuramos_algunos_parametros_y_corroboramos_que_este_como_no_configurada(self):
+		configuracion = ConfiguracionCI()
 		configuracion.set_token("token")
 		configuracion.set_repositorio("repositorio")
 
@@ -73,7 +73,7 @@ class TestConfiguracionTravis(unittest.TestCase):
 	
 
 def main():
-	borrar_configuracion_travis_previa()
+	borrar_configuracion_ci_previa()
 	unittest.main()
 
 if __name__ == '__main__':

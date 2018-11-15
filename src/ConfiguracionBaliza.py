@@ -1,4 +1,4 @@
-from ConfiguracionTravis import ConfiguracionTravis
+from ConfiguracionCI import ConfiguracionCI
 from ConfiguracionRed import ConfiguracionRed
 from ConfiguracionLedRGB import ConfiguracionLedRGB
 from ConfiguracionBuzzer import ConfiguracionBuzzer
@@ -7,19 +7,19 @@ class ConfiguracionBaliza:
 
     class __ConfiguracionBaliza:
 
-        __configuracion_travis = None
+        __configuracion_ci = None
         __configuracion_red = None
         __configuracion_Led_RGB = None
         __configuracion_buzzer = None
 
         def __init__(self):
-            self.__configuracion_travis = ConfiguracionTravis()
+            self.__configuracion_ci = ConfiguracionCI()
             self.__configuracion_red = ConfiguracionRed()
             self.__configuracion_Led_RGB = ConfiguracionLedRGB()
             self.__configuracion_buzzer = ConfiguracionBuzzer()
 
-        def set_configuracion_travis(self, configuracion_travis):
-            self.__configuracion_travis = configuracion_travis
+        def set_configuracion_ci(self, configuracion_ci):
+            self.__configuracion_ci = configuracion_ci
         
         def set_configuracion_red(self, configuracion_red):
             self.__configuracion_red = configuracion_red
@@ -30,8 +30,8 @@ class ConfiguracionBaliza:
         def set_configuracion_buzzer(self, configuracion_buzzer):
             self.__configuracion_buzzer = configuracion_buzzer
 
-        def get_configuracion_travis(self):
-            return self.__configuracion_travis
+        def get_configuracion_ci(self):
+            return self.__configuracion_ci
         
         def get_configuracion_red(self):
             return self.__configuracion_red
@@ -46,7 +46,7 @@ class ConfiguracionBaliza:
         Borra la configuacion de todas las subconfiguraciones
         """
         def borrar_configuracion(self, borrar_archivos_configuracion=False):
-            self.__configuracion_travis.borrar_configuracion(borrar_archivos_configuracion)
+            self.__configuracion_ci.borrar_configuracion(borrar_archivos_configuracion)
             self.__configuracion_red.borrar_configuracion(borrar_archivos_configuracion)
             self.__configuracion_Led_RGB.borrar_configuracion(borrar_archivos_configuracion)
             self.__configuracion_buzzer.borrar_configuracion(borrar_archivos_configuracion)

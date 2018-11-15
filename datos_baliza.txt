@@ -1,6 +1,7 @@
 #Hardcodeamos las configuraciones
 #Configuracion de Travis
 TRAVIS_API_URL = "http://127.0.0.1:8080"
+GITLAB_API_URL = "https://gitlab.com/api/v4"
 TOKEN = "9cHb1xMQyaGSSSsi6xTW5Q"
 #TOKEN = "zIad7_tjIcVqyc3bo0agUw"
 REPOSITORIO = "dyasc-2018"
@@ -10,3 +11,17 @@ USUARIO = "MrKupo"
 #Configuracion de Red
 SSID = "AP"#"Fibertel WiFi589 2.4GHz"
 CLAVE = "Passw0rd"#"00438829825"
+
+
+
+~~~~~~~~~~~~~~~ Travis ~~~~~~~~~~~~~~~
+Usuario: MrKupo
+Repositorio: dyasc-2018
+Token: 9cHb1xMQyaGSSSsi6xTW5Q
+API URL: https://api.travis-ci.org
+
+~~~~~~~~~~~~~~~ GitLab ~~~~~~~~~~~~~~~
+Usuario: MrKupo
+Repositorio: test_ci
+Token: _6ExBju88GSiQvq-m4Rc
+API URL: https://gitlab.com/api/v4

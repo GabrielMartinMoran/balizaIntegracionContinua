@@ -1,9 +1,9 @@
-<form id="formularioTravis" class="mx-2">
+<form id="formularioCI" class="mx-2">
     <br/>
-    <h3>Configuración de Travis</h3>
+    <h3>Configuración del Servidor CI</h3>
     <div class="row spacer col-lg-12 flex-wrap">
         <div class="row col-md-4">
-            <label for="textUsuario" class="col-md-4 control-label">Nombre de Usuario (Git)</label>
+            <label for="textUsuario" class="col-md-4 control-label">Nombre de Usuario</label>
             <div>
                 <input type="text" id="textUsuario" name="textUsuario"/>
             </div>
@@ -15,28 +15,38 @@
             </div>
         </div>        
         <div class="row col-md-4">
-            <label for="textToken" class="col-md-4 control-label">Token de Travis</label>
+            <label for="textToken" class="col-md-4 control-label">Token</label>
             <div>
                 <input type="text" id="textToken" name="textToken"/>
             </div>
         </div>
         <div class="row col-md-4">
-            <label for="textAPIurl" class="col-md-4 control-label">URL de la API de Travis</label>
+            <label for="textAPIurl" class="col-md-4 control-label">URL de la API</label>
             <div>
                 <input type="text" id="textAPIurl" name="textAPIurl"/>
             </div>
         </div>
+        <div class="row col-md-4">
+            <label for="textAPIurl" class="col-md-4 control-label">Servidor CI</label>
+            <div>
+                <select id="selectorServidorCI">
+                    <option value="TRAVIS">Travis</option>
+                    <option value="GITLAB">GitLab</option>
+                </select> 
+            </div>
+        </div>
+        
     </div>
     <br/>
     <div class="row">
         <div class="col-md-2 col-xs-2 center-block"> 
-            <button type="button" class="btn btn-primary" onclick="submitTravis()">Guardar configuración de Travis</button>
+            <button type="button" class="btn btn-primary" onclick="submitFormularioCI()">Guardar configuración CI</button>
         </div>
     </div>
 </form>
 <script>
-    function submitTravis() {
-        var elementos = document.getElementById("formularioTravis").elements;
+    function submitFormularioCI() {
+        var elementos = document.getElementById("formularioCI").elements;
         var parametros = [
             {
                 "nombre" : "usuario",
@@ -53,18 +63,23 @@
             {
                 "nombre" : "APIurl",
                 "valor"  : elementos["textAPIurl"].value
-            }  
+            },
+            {
+                "nombre" : "servidorCI",
+                "valor"  : elementos["selectorServidorCI"].options[elementos["selectorServidorCI"].selectedIndex].value
+            },
+            
         ];
-        httpGet("set_configuracion_travis", parametros).then(
+        httpGet("set_configuracion_ci", parametros).then(
             function(response){
                 console.log(response);
             }
         );
     }
     function getDatosTravis() {
-        httpGet("get_configuracion_travis", null).then(
+        httpGet("get_configuracion_ci", null).then(
             function(response){
-                var elementos = document.getElementById("formularioTravis").elements;                
+                var elementos = document.getElementById("formularioCI").elements;                
                 if(response.usuario){
                     elementos["textUsuario"].value = response.usuario;
                 }
@@ -76,6 +91,9 @@
                 }
                 if(response.APIurl){
                     elementos["textAPIurl"].value = response.APIurl;
+                }
+                if(response.servidorCI){
+                    elementos["selectorServidorCI"].options[elementos["selectorServidorCI"].selectedIndex].value = response.servidorCI;
                 }
             }
         );

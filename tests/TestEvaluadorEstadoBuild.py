@@ -63,8 +63,8 @@ def main():
 		print("ERROR: No es posible ejecutar las pruebas si el Servidor Mockup de Travis no esta corriendo en",TRAVIS_API_URL)
 		return
 	configuracion = ConfiguracionBaliza()
-	configuracion_travis = ConfiguracionBaliza.instancia.get_configuracion_travis()
-	configuracion_travis.configurar(USUARIO,REPOSITORIO,TOKEN,TRAVIS_API_URL)	
+	configuracion_ci = ConfiguracionBaliza.instancia.get_configuracion_ci()
+	configuracion_ci.configurar(USUARIO,REPOSITORIO,TOKEN,TRAVIS_API_URL)	
 	unittest.main(exit=False)
 	configuracion.borrar_configuracion(True)
 

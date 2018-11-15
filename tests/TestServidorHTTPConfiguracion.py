@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 import unittest
 import requests
 from ServidorHTTPConfiguracion import ServidorHTTPConfiguracion
-from ConfiguracionTravis import ConfiguracionTravis
+from ConfiguracionCI import ConfiguracionCI
 from ConfiguracionRed import ConfiguracionRed
 
 HOST = "localhost"
@@ -19,14 +19,14 @@ PUERTO_2 = 8082
 class TestServidorHTTPConfiguracion(unittest.TestCase):
 
     def test_establecemos_una_configuracion_para_travis_y_corroboramos(self):
-        configuracion_travis = ConfiguracionTravis()
-        servidor = ServidorHTTPConfiguracion(HOST, PUERTO_1, configuracion_travis, None)
+        configuracion_ci = ConfiguracionCI()
+        servidor = ServidorHTTPConfiguracion(HOST, PUERTO_1, configuracion_ci, None)
 
-        response = requests.get("http://"+HOST+":"+str(PUERTO_1)+"/set_configuracion_travis?usuario=USUARIO&repositorio=REPOSITORIO&token=TOKEN&APIurl=http://test.url")
+        response = requests.get("http://"+HOST+":"+str(PUERTO_1)+"/set_configuracion_ci?usuario=USUARIO&repositorio=REPOSITORIO&token=TOKEN&APIurl=http://test.url")
         
-        self.assertEqual("USUARIO", configuracion_travis.get_usuario())
-        self.assertEqual("REPOSITORIO", configuracion_travis.get_repositorio())
-        self.assertEqual("TOKEN", configuracion_travis.get_token())
+        self.assertEqual("USUARIO", configuracion_ci.get_usuario())
+        self.assertEqual("REPOSITORIO", configuracion_ci.get_repositorio())
+        self.assertEqual("TOKEN", configuracion_ci.get_token())
 
         servidor.detener()
 
