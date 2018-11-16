@@ -45,11 +45,11 @@ class ServidorHTTPConfiguracion:
             self.__configuracion_ci.configurar(parametros["usuario"], parametros["repositorio"], parametros["token"], api_url=parametros["APIurl"], servidor_ci=parametros["servidorCI"])
         else:
             self.__configuracion_ci.configurar(parametros["usuario"], parametros["repositorio"], parametros["token"], servidor_ci=parametros["servidorCI"])
-        return "{'resultado':'Configuracion de Travis establecida!'}"
+        return '{"resultado":"Configuracion CI establecida!"}'
 
     def set_configuracion_red(self, parametros):
         self.__configuracion_red.configurar(parametros["SSID"], parametros["clave"])
-        return "{'resultado':'Configuracion de red establecida!'}"
+        return '{"resultado":"Configuracion de red establecida!"}'
 
     def get_configuracion_ci(self, parametros):
         response = {

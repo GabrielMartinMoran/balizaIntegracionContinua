@@ -21,6 +21,7 @@ class ServidorHTTP():
 
     def iniciar(self, threaded = True):
         self.__servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.__servidor.settimeout(None)
         self.__servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.__servidor.bind((self.__host, self.__puerto))
         self.__servidor.listen(self.__clientes_maximos)

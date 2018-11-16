@@ -72,10 +72,21 @@
         ];
         httpGet("set_configuracion_ci", parametros).then(
             function(response){
-                console.log(response);
+                alert(response.resultado);
             }
         );
     }
+
+    function getSelectIndex(valor, elementos) {
+        for (var i = 0; i < elementos.length; i++) {
+            var elemento = elementos[i];
+            if(elemento.value === valor){
+                return elemento.index;
+            }
+        }
+        return -1;
+    }
+
     function getDatosTravis() {
         httpGet("get_configuracion_ci", null).then(
             function(response){
@@ -93,7 +104,8 @@
                     elementos["textAPIurl"].value = response.APIurl;
                 }
                 if(response.servidorCI){
-                    elementos["selectorServidorCI"].options[elementos["selectorServidorCI"].selectedIndex].value = response.servidorCI;
+                    var index = getSelectIndex(response.servidorCI, elementos["selectorServidorCI"].options);
+                    elementos["selectorServidorCI"].selectedIndex = index;
                 }
             }
         );

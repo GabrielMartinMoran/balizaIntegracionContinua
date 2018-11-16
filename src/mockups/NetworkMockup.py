@@ -17,3 +17,6 @@ class WLAN:
 
     def connect(self, SSID, clave):
         self.__conectado = True
+
+    def disconnect(self):
+        self.__conectado = False
