@@ -1,7 +1,7 @@
 from ClienteTravis import ClienteTravis
 from ClienteGitLab import ClienteGitLab
 from ConfiguracionBaliza import ConfiguracionBaliza
-from ManejadorDeEstados import ManejadorDeEstados
+from ManejadorDeSalidas import ManejadorDeSalidas
 from gc import collect
 import ServidoresCI
 collect()

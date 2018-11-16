@@ -3,7 +3,7 @@ from TraductorEstadoALedRGB import TraductorEstadoALedRGB
 from TraductorEstadoAConsola import TraductorEstadoAConsola
 from _thread import start_new_thread
 
-class ManejadorDeEstados:
+class ManejadorDeSalidas:
     def __init__(self):
         self.lista_de_salidas = []
     
