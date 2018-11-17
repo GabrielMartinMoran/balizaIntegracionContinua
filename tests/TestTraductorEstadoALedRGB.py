@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 
 import unittest
 from EstadoBuild import EstadoBuild
-from TraductorEstadoALedRGB import *
+from TraductorEstadoALedRGB import TraductorEstadoALedRGB
 from ConfiguracionLedRGB import ConfiguracionLedRGB
 
 class ManejadorLedRGBMockup:
