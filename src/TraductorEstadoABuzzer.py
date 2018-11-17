@@ -1,9 +1,6 @@
 from ReproductorMusical import ReproductorMusical
 from EstadoBuild import EstadoBuild
-
-class EstadoNoEspecificadoException(Exception):
-    def __init__(self, mensaje):
-        self.mensaje = mensaje
+from EstadoBuild import EstadoNoEspecificadoException
 
 class TraductorEstadoABuzzer:
 
@@ -22,4 +19,4 @@ class TraductorEstadoABuzzer:
         if(estado in self.__CANCIONES_ESTADOS):
             self.__reproductor.reproducir(self.__CANCIONES_ESTADOS[estado])
         else:
-            raise EstadoNoEspecificadoException("La estado " + estado + " no esta especificado")
+            raise EstadoNoEspecificadoException("El estado " + estado + " no esta especificado")

@@ -1,9 +1,6 @@
 from EstadoBuild import EstadoBuild
+from EstadoBuild import EstadoNoEspecificadoException
 from ManejadorLedRGB import ManejadorLedRGB
-
-class EstadoNoEspecificadoException(Exception):
-    def __init__(self, mensaje):
-        self.mensaje = mensaje
 
 class TraductorEstadoALedRGB:
     __COLORES_ESTADOS = {
