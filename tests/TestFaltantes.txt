@@ -1,8 +1,0 @@
-boot
-ControladorLed
-ControladorLedRGB
-EvaluadorEstadoBuild
-LoopPrincipal
-main
-ManejadorLedRGB
-run (separarlo de la carpeta src)
