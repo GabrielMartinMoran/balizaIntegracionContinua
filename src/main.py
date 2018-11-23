@@ -2,9 +2,18 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ CONSTANTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
+#HOST WiFi
 IP_HOST_CONFIGURACION = "192.168.4.1"
 PUERTO_HOST_CONFIGURACION = 80
+
+#CLIENTE WiFi
 CANTIDAD_INTENTOS_CONEXION_WIFI = 5
+
+#PINES
+PIN_LED_ROJO = 12
+PIN_LED_VERDE = 13
+PIN_LED_AZUL = 14
+PIN_BUZZER = 32
 
 """
 ~~~~~~~~~~~~~~~~~~~~~~~~~~ CONFIGURACION ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,10 +31,10 @@ config_buzzer = ConfiguracionBaliza.instancia.get_configuracion_buzzer()
 #Solo configuramos en caso de que no se encuentre el archivo de configuracion para no
 #consumir usos de la EPROM
 if(not config_led_rgb.esta_configurada()):
-    config_led_rgb.configurar(12, 13, 14)
+    config_led_rgb.configurar(PIN_LED_ROJO, PIN_LED_VERDE, PIN_LED_AZUL)
 
 if(not config_buzzer.esta_configurada()):
-    config_buzzer.configurar(32)
+    config_buzzer.configurar(PIN_BUZZER)
 
 """
 ~~~~~~~~~~~~~~~~~~~~~ CONEXION A WiFi INICIAL ~~~~~~~~~~~~~~~~~~~~~
