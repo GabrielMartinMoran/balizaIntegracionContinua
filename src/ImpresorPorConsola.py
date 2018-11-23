@@ -1,7 +1,7 @@
 from EstadoBuild import EstadoBuild
 from EstadoBuild import EstadoNoEspecificadoException
 
-class TraductorEstadoAConsola:
+class ImpresorPorConsola:
 
     __mensaje_de_cambio_de_estado = "CAMBIO DE ESTADO DEL BUILD A:"
 

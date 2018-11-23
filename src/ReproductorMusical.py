@@ -2,6 +2,8 @@ import ImportadorMultiplataforma
 CB = ImportadorMultiplataforma.importar("ControladorBuzzer")
 from json import loads
 from time import sleep
+from EstadoBuild import EstadoBuild
+from EstadoBuild import EstadoNoEspecificadoException
 
 class PorcentajeInvalidoException(Exception):
     def __init__(self, mensaje):
@@ -12,10 +14,18 @@ class CancionNoEncontradaException(Exception):
         self.mensaje = mensaje
 
 class ReproductorMusical:
+
+    __CANCIONES_ESTADOS = {
+        EstadoBuild.PASSED:             "PASSED",
+        EstadoBuild.FAILED:             "FAILED",
+        EstadoBuild.RUNNING:            "RUNNING",
+        EstadoBuild.CONNECTION_ERROR:   "CONNECTION_ERROR",
+        EstadoBuild.ACCESS_DENIED:      "ACCESS_DENIED"
+    }
     
     def __init__(self, configuracion_buzzer):
-        self.controladorBuzzer = CB.ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
-        self.controladorBuzzer.set_intensidad(self.__map__(30))
+        self.__controlador_buzzer = CB.ControladorBuzzer(configuracion_buzzer.get_pin_buzzer())
+        self.__controlador_buzzer.set_intensidad(self.__map__(30))
         self.__NOTAS_MUSICALES = self.__obtener_recurso_json("NotasMusicales.json")
         self.__CANCIONES = self.__obtener_recurso_json("Canciones.json")
 
@@ -24,6 +34,12 @@ class ReproductorMusical:
         json = loads(archivo.read())
         archivo.close()
         return json
+    
+    def set_estado(self, estado):
+        if(estado in self.__CANCIONES_ESTADOS):
+            self.reproducir(self.__CANCIONES_ESTADOS[estado])
+        else:
+            raise EstadoNoEspecificadoException("El estado " + estado + " no esta especificado")
 
     def __map__(self, n):
         if(n < 0 or n > 100):
@@ -34,10 +50,10 @@ class ReproductorMusical:
         if(cancion in self.__CANCIONES):
             for nota in self.__CANCIONES[cancion]:
                 if(nota == "SILENCIO"):
-                    self.controladorBuzzer.set_intensidad(self.__map__(0))
+                    self.__controlador_buzzer.set_intensidad(self.__map__(0))
                 else:
-                    self.controladorBuzzer.set_intensidad(self.__map__(30))
-                    self.controladorBuzzer.set_frecuencia(self.__NOTAS_MUSICALES[nota])
+                    self.__controlador_buzzer.set_intensidad(self.__map__(30))
+                    self.__controlador_buzzer.set_frecuencia(self.__NOTAS_MUSICALES[nota])
                 sleep(0.150)
         else:
             raise CancionNoEncontradaException("La cancion " + cancion + " no esta especificada")

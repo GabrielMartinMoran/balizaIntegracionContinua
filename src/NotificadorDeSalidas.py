@@ -1,9 +1,6 @@
-from TraductorEstadoABuzzer import TraductorEstadoABuzzer
-from TraductorEstadoALedRGB import TraductorEstadoALedRGB
-from TraductorEstadoAConsola import TraductorEstadoAConsola
 from _thread import start_new_thread
 
-class ManejadorDeSalidas:
+class NotificadorDeSalidas:
     def __init__(self):
         self.lista_de_salidas = []
     
